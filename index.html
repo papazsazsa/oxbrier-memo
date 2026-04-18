@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OXBRIER — Opportunity Memo</title>
+
+<!-- Social preview (OpenGraph + Twitter Card) -->
+<meta name="description" content="OXBRIER is a film label that makes mid-budget adult thrillers about war, espionage, and crime — sourced from our exclusive network of soldiers, spies, and crooks." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="OXBRIER" />
+<meta property="og:title" content="OXBRIER — Opportunity Memo" />
+<meta property="og:description" content="A film label making mid-budget adult thrillers about war, espionage, and crime — sourced from an exclusive network of soldiers, spies, and crooks." />
+<meta property="og:image" content="assets/og-preview.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="OXBRIER — black dagger on black background" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="OXBRIER — Opportunity Memo" />
+<meta name="twitter:description" content="A film label making mid-budget adult thrillers about war, espionage, and crime." />
+<meta name="twitter:image" content="assets/og-preview.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000;
+    --ink:#ece7dc;
+    --ink-dim:#a8a193;
+    --rule:#403c34;
+    --accent:#ff0000;
+    --paper:#12120f;
+    --measure:52ch;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:transparent;color:var(--ink);}
+  html{background:var(--bg);}
+  body{
+    font-family:'Newsreader', Georgia, serif;
+    font-size:24px;
+    line-height:1.6;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  /* Scroll progress bar */
+  .progress{
+    position:fixed;top:0;left:0;right:0;height:2px;background:var(--bg);z-index:200;pointer-events:none;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .progress__bar{
+    height:100%;width:0%;background:var(--accent);transition:width .08s linear;
+  }
+
+  /* Top label */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:40;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-dim);
+    background:linear-gradient(to bottom, rgba(14,14,12,.92), rgba(14,14,12,0));
+    pointer-events:none;
+  }
+  .topbar span{pointer-events:auto}
+
+  main{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:22vh 28px 24vh;
+    position:relative;
+    z-index:3;
+  }
+
+  /* Title page (full-bleed) */
+  .cover{
+    position:relative;
+    height:100vh;
+    min-height:620px;
+    width:100%;
+    overflow:visible;
+    background:transparent;
+    z-index:2;
+  }
+  /* Knife sits in its OWN fixed layer so it follows the reader */
+  .cover-knife-layer{
+    position:fixed;
+    top:0;left:0;right:0;
+    height:100vh;
+    min-height:620px;
+    pointer-events:none;
+    z-index:1;
+    background:#000;
+  }
+  .cover__knife{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    will-change:transform,opacity;
+  }
+  .cover__knife img{
+    height:92%;width:auto;max-width:80%;
+    object-fit:contain;
+    filter:drop-shadow(0 20px 60px rgba(0,0,0,.6));
+    user-select:none;-webkit-user-drag:none;
+  }
+  .cover__title{
+    position:absolute;left:0;right:0;
+    top:43%;transform:translateY(-50%);
+    text-align:center;
+    font-family:'Barlow Condensed','Helvetica Neue',sans-serif;
+    font-weight:800;
+    font-size:clamp(72px,18vw,260px);
+    line-height:.88;
+    letter-spacing:.02em;
+    color:#ff0000;
+    text-transform:uppercase;
+    mix-blend-mode:difference;
+    pointer-events:none;
+    will-change:transform,opacity;
+  }
+  .cover__meta{
+    position:absolute;left:0;right:0;bottom:36px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    padding:0 28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--ink-dim);
+    will-change:transform,opacity;
+  }
+  .cover__meta .r{text-align:right;line-height:1.8;}
+  .cover__tag{color:var(--accent);}
+  .cover__scrollhint{
+    position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--ink-dim);
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .cover__scrollhint .line{width:1px;height:22px;background:var(--ink-dim);animation:drop 1.8s ease-in-out infinite;}
+
+  /* Hero (executive summary) */
+  .hero{
+    min-height:88vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-bottom:12vh;
+    border-bottom:1px solid var(--rule);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:28px;
+  }
+  h1.title{
+    font-family:'Barlow Condensed', 'Helvetica Neue', sans-serif;
+    font-weight:700;
+    font-size:clamp(56px,8vw,104px);
+    line-height:0.95;
+    letter-spacing:-0.01em;
+    text-transform:uppercase;
+    margin:0 0 32px;
+  }
+  .lede{
+    font-size:27px;line-height:1.5;color:var(--ink);
+    max-width:58ch;
+  }
+  .hero .sig, .sig{
+    margin-top:56px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    line-height:1.8;
+  }
+  .hero .sig a, .sig a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(255,0,0,.35);}
+  .hero .sig a:hover, .sig a:hover{border-bottom-color:var(--accent);}
+
+  /* Sections */
+  section.block{padding:10vh 0;border-bottom:1px solid var(--rule);}
+  section.block:last-of-type{border-bottom:0;}
+
+  /* Sticky section header — wraps h2 + .section-title */
+  .sticky-head{
+    position:sticky;
+    top:0;
+    z-index:40;
+    margin:0 -10px 40px;
+    padding:18px 10px 14px;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+  }
+  /* Hide section numbers (01, 02...) above each heading */
+  section.block > h2,
+  .sticky-head h2{display:none;}
+  .sticky-head .section-title{
+    margin:0;
+    font-size:clamp(32px,4.4vw,52px);
+    line-height:.98;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:100%;
+  }
+  @media (max-width:640px){
+    .sticky-head{padding:14px 10px 12px;}
+    .sticky-head .section-title{
+      font-size:clamp(26px,6.5vw,36px);
+    }
+  }
+
+  h2{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);
+    font-weight:500;
+    margin:0 0 8px;
+  }
+  h2 + .section-title{
+    font-family:'Barlow Condensed', 'Helvetica Neue', sans-serif;
+    font-weight:700;
+    font-size:clamp(40px,5vw,64px);
+    line-height:0.98;
+    letter-spacing:-0.005em;
+    text-transform:uppercase;
+    margin:0 0 40px;
+    color:var(--accent);
+  }
+  p{margin:0 0 1.15em;}
+  p + p{text-indent:0;}
+  strong{font-weight:600;color:#fff;}
+  em{font-style:italic;}
+
+  ul{padding-left:1.2em;margin:0 0 1.2em;}
+  ul li{margin-bottom:.9em;}
+
+  /* Blockquote */
+  blockquote{
+    margin:2em 0;
+    padding:0 0 0 28px;
+    border-left:2px solid var(--accent);
+    font-size:22px;line-height:1.5;
+    color:#fff;font-style:italic;
+    max-width:60ch;
+  }
+  blockquote cite{
+    display:block;margin-top:14px;
+    font-family:'JetBrains Mono',monospace;font-style:normal;
+    font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+
+  /* Tables */
+  .tbl-wrap{margin:2em -20px;overflow-x:auto;}
+  table{
+    width:100%;border-collapse:collapse;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;line-height:1.5;
+  }
+  th,td{
+    text-align:left;padding:12px 14px;
+    vertical-align:top;
+  }
+  th{
+    color:var(--ink-dim);font-weight:500;
+    text-transform:uppercase;letter-spacing:.12em;font-size:10px;
+    border-bottom:1px solid #fff;
+  }
+  tbody tr:nth-child(odd) td{
+    background:rgba(255,255,255,0.06);
+  }
+  td strong{color:#fff}
+
+  /* Footnote refs */
+  sup.fn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7em;vertical-align:super;line-height:0;
+    margin-left:2px;
+  }
+  sup.fn a{
+    color:var(--accent);text-decoration:none;
+    border-bottom:1px dotted var(--accent);
+    padding:0 2px;cursor:pointer;
+  }
+  sup.fn a:hover{background:var(--accent);color:#fff;}
+
+  /* Inline footnote containers (deprecated) */
+  .fn-inline{display:none;}
+
+  /* Footnote popover */
+  .fn-pop{
+    position:fixed;
+    z-index:100;
+    max-width:min(360px, calc(100vw - 24px));
+    background:#0a0a0a;
+    border:1px solid rgba(255,255,255,.18);
+    border-left:3px solid var(--accent);
+    padding:14px 16px 12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;line-height:1.55;
+    color:var(--ink);
+    box-shadow:0 10px 32px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.4);
+    opacity:0;
+    transform:translateY(-4px);
+    transition:opacity .18s ease, transform .18s ease;
+    pointer-events:none;
+  }
+  .fn-pop.open{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .fn-pop__num{
+    color:var(--accent);
+    font-weight:600;
+    margin-right:6px;
+  }
+  .fn-pop__body{margin-bottom:10px;}
+  .fn-pop__body a{
+    color:var(--ink);
+    text-decoration:underline;
+    text-decoration-color:rgba(255,255,255,.3);
+    text-underline-offset:2px;
+    word-break:break-word;
+  }
+  .fn-pop__body a:hover{text-decoration-color:var(--accent);}
+  .fn-pop__foot{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    padding-top:8px;
+    border-top:1px solid rgba(255,255,255,.12);
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .fn-pop__jump{
+    color:var(--ink-dim);
+    text-decoration:none;
+    border:none;
+    background:none;
+    font:inherit;
+    letter-spacing:inherit;
+    text-transform:inherit;
+    cursor:pointer;
+    padding:0;
+  }
+  .fn-pop__jump:hover{color:var(--ink);}
+  .fn-pop__close{
+    color:var(--ink-dim);
+    background:none;border:none;
+    font:inherit;letter-spacing:inherit;text-transform:inherit;
+    cursor:pointer;padding:0;
+  }
+  .fn-pop__close:hover{color:var(--accent);}
+  /* little arrow pointing to the footnote */
+  .fn-pop::before{
+    content:"";
+    position:absolute;
+    width:10px;height:10px;
+    background:#0a0a0a;
+    border-left:1px solid rgba(255,255,255,.18);
+    border-top:1px solid rgba(255,255,255,.18);
+    transform:rotate(45deg);
+  }
+  .fn-pop[data-placement="bottom"]::before{
+    top:-6px;left:20px;
+  }
+  .fn-pop[data-placement="top"]::before{
+    bottom:-6px;left:20px;
+    border-left:none;border-top:none;
+    border-right:1px solid rgba(255,255,255,.18);
+    border-bottom:1px solid rgba(255,255,255,.18);
+  }
+
+  /* Highlight the active footnote number */
+  sup.fn a.fn-active{
+    background:var(--accent);
+    color:#fff;
+    border-bottom-color:transparent;
+  }
+
+  /* Subheads (for itemized sections like Unfair Advantage) */
+  h3.subhead{
+    font-family:'Barlow Condensed','Helvetica Neue',sans-serif;
+    font-weight:700;
+    font-size:clamp(22px, 2.4vw, 28px);
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    color:#fff;
+    margin:1.8em 0 .4em;
+  }
+
+  /* Key takeaways emphasis list */
+  ul.takeaways, ol.takeaways{
+    list-style:none;padding:0;margin:2.2em 0 0;
+    counter-reset:takeaway;
+  }
+  ul.takeaways li, ol.takeaways li{
+    position:relative;
+    padding:.6em 0 .9em 72px;
+    margin-bottom:1.1em;
+    font-family:'Barlow Condensed','Helvetica Neue',sans-serif;
+    font-weight:600;
+    font-size:34px;
+    line-height:1.15;
+    letter-spacing:-0.005em;
+    color:#fff;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    counter-increment:takeaway;
+  }
+  ul.takeaways li:last-child, ol.takeaways li:last-child{
+    border-bottom:0;
+  }
+  ul.takeaways li::before, ol.takeaways li::before{
+    content:counter(takeaway,decimal-leading-zero);
+    position:absolute;left:0;top:.55em;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:.2em;
+    color:var(--accent);
+    width:auto;height:auto;background:transparent;
+  }
+
+  /* Contact block at end of Key Takeaways */
+  .contact-lede{
+    margin-top:2.2em;
+    color:var(--ink-dim);
+  }
+
+  /* Chart frame */
+  .chart{margin:3em -10px 1em;padding:1.5em 0;}
+  .chart__title{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-dim);text-align:center;margin-bottom:1.8em;
+    padding-bottom:1.2em;border-bottom:1px solid var(--rule);
+  }
+
+  /* Vertical bar chart (years on x-axis) */
+  .barchart{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:14px;
+    align-items:end;
+    height:260px;
+    padding:0 4px 0;
+  }
+  .barchart__col{
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+    height:100%;position:relative;
+  }
+  .barchart__col .barchart__val{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;font-weight:500;color:#fff;
+    margin-bottom:6px;
+    opacity:0;
+    transition:opacity .4s ease calc(var(--d,0ms) + 700ms);
+  }
+  .chart.in .barchart__col .barchart__val{opacity:1;}
+  .barchart__bar{
+    width:70%;max-width:80px;
+    height:0;
+    background:var(--accent);
+    transform-origin:bottom;
+    transition:height 1s cubic-bezier(.22,.8,.2,1) var(--d,0ms);
+  }
+  .chart.in .barchart__bar{
+    /* height scales so 36% → ~210px (near top) */
+    height:calc(var(--pct) * 5.8px);
+  }
+  .barchart__year{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.14em;
+    color:var(--ink-dim);
+    margin-top:10px;padding-top:10px;
+    border-top:1px solid var(--rule);
+    width:100%;text-align:center;
+  }
+  @media (max-width:640px){
+    .barchart{gap:8px;height:200px;}
+    .barchart__year{font-size:10px;letter-spacing:.06em;}
+    .barchart__col .barchart__val{font-size:11px;}
+    .chart.in .barchart__bar{height:calc(var(--pct) * 4.5px);}
+  }
+
+  /* Bar chart (simple) */
+  .chart{margin:2.5em 0 1em;}
+  .chart__row{
+    margin-bottom:22px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .chart__label{
+    display:flex;justify-content:space-between;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-dim);margin-bottom:6px;
+  }
+  .chart__label strong{color:#fff;font-weight:500;}
+  .chart__track{
+    position:relative;height:14px;background:var(--rule);
+  }
+  .chart__bar{
+    position:absolute;top:0;left:0;bottom:0;width:0%;
+    background:var(--accent);
+    transition:width 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  .chart__caption{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-dim);margin-top:1.5em;
+  }
+
+  /* Sources section */
+  .sources ol{
+    padding-left:0;list-style:none;counter-reset:fn;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;line-height:1.6;color:var(--ink-dim);
+  }
+  .sources li{
+    counter-increment:fn;
+    padding:10px 0;
+    display:flex;gap:18px;
+    scroll-margin-top:80px;
+  }
+  .sources li::before{
+    content:counter(fn);
+    color:var(--accent);min-width:28px;
+  }
+  .sources li a{color:#808080;word-break:break-all;}
+  .sources li.flash{background:rgba(255,0,0,.12);}
+
+  a{color:var(--accent);}
+
+  /* Reveal-on-scroll */
+  .reveal{
+    opacity:0;transform:translateY(20px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .reveal.in{opacity:1;transform:none;}
+
+  /* Scroll hint */
+  .scrollhint{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--ink-dim);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    transition:opacity .4s ease;z-index:40;pointer-events:none;
+  }
+  .scrollhint .line{width:1px;height:26px;background:var(--ink-dim);animation:drop 1.8s ease-in-out infinite;}
+  @keyframes drop{
+    0%{transform:scaleY(0);transform-origin:top;}
+    50%{transform:scaleY(1);transform-origin:top;}
+    51%{transform:scaleY(1);transform-origin:bottom;}
+    100%{transform:scaleY(0);transform-origin:bottom;}
+  }
+
+  hr.sep{border:0;border-top:1px solid var(--rule);margin:6em 0;}
+
+  @media (max-width:640px){
+    body{font-size:23px;}
+    main{padding:18vh 20px 20vh;}
+    .tbl-wrap{margin:1.5em -10px;}
+    th,td{padding:10px 8px;}
+    ul.takeaways li, ol.takeaways li{font-size:26px;padding-left:54px;}
+    .lede{font-size:22px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress__bar" id="progbar"></div></div>
+
+<div class="cover-knife-layer" aria-hidden="true">
+  <div class="cover__knife" id="coverKnife"><img src="assets/knife.png" alt=""></div>
+</div>
+
+<section class="cover" id="cover">
+  <h1 class="cover__title" id="coverTitle">OXBRIER</h1>
+</section>
+
+<main>
+
+  <header class="hero">
+    <h1 class="title reveal" id="execSummaryTitle">Executive Summary</h1>
+    <p class="lede reveal">OXBRIER is a film label that makes mid-budget adult thrillers about war, espionage, and crime – sourced from our exclusive network of soldiers, spies, and crooks.</p>
+    <p class="lede reveal" style="margin-top:1em;">Our founders come from entertainment, tech, and special operations – the name is borrowed from an old skunkworks program – and our mission is to make films like <em>Platoon, Syriana,</em> and <em>Heat</em>. Our proof-of-concept – a $22M action-thriller, based on a DARPA engineer and produced by Mandalay/Sony – is in theaters November 2026.</p>
+    <p class="lede reveal" style="margin-top:1em;">Hollywood's major studios carry billions in debt and have traded creative risk for franchise logic. The mid budget adult thriller has been the casualty; these films fell from over a third of releases to single digits.<sup class="fn"><a data-fn="1" href="#fn-1">1</a></sup> The audience didn't disappear; the supply did.</p>
+    <span class="fn-inline" id="inline-1"></span>
+    <p class="lede reveal" style="margin-top:1em;">This is an underpriced opportunity that only we can service; we are raising a $5M seed round to develop the slate, co-finance three more films, and own the category.</p>
+
+    <div class="sig reveal">
+      Chris Papasadero<br>
+      <a href="mailto:chris@oxbrier.com">chris@oxbrier.com</a><br>
+      <a href="tel:+15032301741">+1 503 230-1741</a>
+    </div>
+  </header>
+
+  <section class="block">
+    <h2 class="reveal">01</h2>
+    <div class="section-title reveal">The Problem is Structural</div>
+    <p class="reveal">The studios have over-leveraged both their hard and soft assets.</p>
+    <p class="reveal">On the financial side, the numbers are public: Warner Bros Discovery carries $34.6 billion in net debt.<sup class="fn"><a data-fn="2" href="#fn-2">2</a></sup> Paramount was downgraded to junk in March 2024.<sup class="fn"><a data-fn="3" href="#fn-3">3</a></sup> Disney holds $45.8 billion in borrowings.<sup class="fn"><a data-fn="4" href="#fn-4">4</a></sup> Companies leveraged at this level do not take creative risk – and the entities that own them do not want them to. The same institutional investors (BlackRock, Vanguard, State Street) hold the largest stakes in rival studios simultaneously; their incentive is dividends and buybacks, not creative investment. Comcast's annual distributions rose from $3.2 billion in 2008 to $18 billion in 2022.<sup class="fn"><a data-fn="5" href="#fn-5">5</a></sup></p>
+    <span class="fn-inline" id="inline-2"></span><span class="fn-inline" id="inline-3"></span><span class="fn-inline" id="inline-4"></span><span class="fn-inline" id="inline-5"></span>
+    <p class="reveal">On the cultural side, the damage is just as severe. The studio system condescends to audiences it does not understand and panders to markets it cannot afford to lose. Nine of the top ten highest-grossing worldwide releases in 2024 were sequels.<sup class="fn"><a data-fn="6" href="#fn-6">6</a></sup> Adults in their forties get capes and video-game adaptations; the 2012 <em>Red Dawn</em> remake had its Chinese antagonist digitally replaced to avoid angering the CCP.</p>
+    <span class="fn-inline" id="inline-6"></span>
+    <p class="reveal">Studios are still thought of as the natural home for film – they are not; they are debt-servicing operations that happen to release films. The result is a monopoly collapsing under its own weight; between 2001 and 2021, the share of mid-budget films fell by roughly two-thirds.<sup class="fn"><a data-fn="1" href="#fn-1">1</a></sup> The entire mid-budget genre category for adults – once a thriving middle market – has been turned into a ghetto.<sup class="fn"><a data-fn="7" href="#fn-7">7</a></sup></p>
+    <span class="fn-inline" id="inline-7"></span>
+
+    <figure class="chart reveal-chart" id="chart-midbudget">
+      <div class="chart__title">Mid-Budget Films as Share of U.S. Releases</div>
+      <div class="barchart">
+        <div class="barchart__col" style="--pct:36;--d:0ms"><div class="barchart__val">36%</div><div class="barchart__bar"></div><div class="barchart__year">1996</div></div>
+        <div class="barchart__col" style="--pct:28;--d:80ms"><div class="barchart__val">28%</div><div class="barchart__bar"></div><div class="barchart__year">2003</div></div>
+        <div class="barchart__col" style="--pct:19;--d:160ms"><div class="barchart__val">19%</div><div class="barchart__bar"></div><div class="barchart__year">2010</div></div>
+        <div class="barchart__col" style="--pct:11;--d:240ms"><div class="barchart__val">11%</div><div class="barchart__bar"></div><div class="barchart__year">2017</div></div>
+        <div class="barchart__col" style="--pct:5;--d:320ms"><div class="barchart__val">5%</div><div class="barchart__bar"></div><div class="barchart__year">2020</div></div>
+        <div class="barchart__col" style="--pct:7;--d:400ms"><div class="barchart__val">7%</div><div class="barchart__bar"></div><div class="barchart__year">2024</div></div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">02</h2>
+    <div class="section-title reveal">The Audience is Proven</div>
+    <p class="reveal">The vacuum is not speculative. The audience for adult thrillers is large, active, and measurably underserved. When the material is authentic, they show up:<sup class="fn"><a data-fn="8" href="#fn-8">8</a></sup></p>
+    <span class="fn-inline" id="inline-8"></span>
+
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Film</th><th>Budget</th><th>Worldwide</th><th>Multiple</th></tr></thead>
+        <tbody>
+          <tr><td>American Sniper (2014)</td><td>$59M</td><td>$548M</td><td>9.3x</td></tr>
+          <tr><td>Top Gun: Maverick (2022)</td><td>$170M</td><td>$1.50B</td><td>8.8x</td></tr>
+          <tr><td>Oppenheimer (2023)</td><td>$100M</td><td>$976M</td><td>9.8x</td></tr>
+          <tr><td>Sicario (2015)</td><td>$30M</td><td>$85M</td><td>2.8x</td></tr>
+          <tr><td>Zero Dark Thirty (2012)</td><td>$40M</td><td>$133M</td><td>3.3x</td></tr>
+          <tr><td>Lone Survivor (2013)</td><td>$40M</td><td>$155M</td><td>3.9x</td></tr>
+          <tr><td>Margin Call (2011)</td><td>$3.5M</td><td>$19.5M</td><td>5.6x</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="reveal">Streamers are spending against this demand, though the supply is inconsistent. Thrillers are the single largest genre category in SVOD spending – $12 billion annually, 24% of total streamer content investment.<sup class="fn"><a data-fn="9" href="#fn-9">9</a></sup> Amazon built Prime Video's identity around <em>Reacher</em> (54.6M viewers in 19 days for Season 3) and Jack Ryan.<sup class="fn"><a data-fn="10" href="#fn-10">10</a></sup> Netflix's <em>The Night Agent</em> generated 812 million hours viewed in its first six months.<sup class="fn"><a data-fn="11" href="#fn-11">11</a></sup> <em>Slow Horses</em> averages 97% on Rotten Tomatoes across five seasons, won two Emmys, and has spent 503 days on Apple's domestic charts.<sup class="fn"><a data-fn="12" href="#fn-12">12</a></sup></p>
+    <span class="fn-inline" id="inline-9"></span><span class="fn-inline" id="inline-10"></span><span class="fn-inline" id="inline-11"></span><span class="fn-inline" id="inline-12"></span>
+
+    <h3 class="subhead reveal">Disappearing Supply</h3>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Indicator</th><th>Then</th><th>Now</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Mid-budget share of releases ($15–65M)</td><td>&gt;33% (2001)</td><td>&lt;10% (2021)</td><td>CNN / Follows<sup class="fn"><a data-fn="1" href="#fn-1">1</a></sup></td></tr>
+          <tr><td>Major studio output vs. pre-pandemic</td><td>Baseline (2017–19)</td><td>Down 25% (2024)</td><td>TD Cowen via Deadline<sup class="fn"><a data-fn="13" href="#fn-13">13</a></sup></td></tr>
+          <tr><td>R-rated share of domestic box office</td><td>~30%+ (historical)</td><td>14% (H1 2022)</td><td>Axios<sup class="fn"><a data-fn="14" href="#fn-14">14</a></sup></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <span class="fn-inline" id="inline-13"></span><span class="fn-inline" id="inline-14"></span>
+
+    <h3 class="subhead reveal">Rising Demand</h3>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead><tr><th>Indicator</th><th>Figure</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Audiences wanting more thrillers</td><td>46%</td><td>Global Cinema Foundation (68K respondents, 2025)</td></tr>
+          <tr><td>Audiences wanting more originals in theaters</td><td>72% (up from 62% in 2023)</td><td>NRG, August 2025</td></tr>
+          <tr><td>Gen Z / Millennials preferring originals over franchises</td><td>74%</td><td>Tubi / Harris Poll (2,503 adults, 2023–24)</td></tr>
+          <tr><td>Adults 25–44 as share of frequent moviegoers (6+/yr)</td><td>43%</td><td>MPA / Comscore</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">03</h2>
+    <div class="section-title reveal">Authenticity Compounds</div>
+    <p class="reveal">Material rooted in operational reality – whether from direct experience or obsessive research – resonates with mass audiences and compounds across format and time.</p>
+
+    <ul>
+      <li class="reveal"><strong>Ian Fleming / James Bond.</strong> Twenty-five films over sixty years have grossed $7.8 billion worldwide.<sup class="fn"><a data-fn="15" href="#fn-15">15</a></sup> Amazon cited Bond as a primary driver of its $8.45 billion acquisition of MGM.<sup class="fn"><a data-fn="16" href="#fn-16">16</a></sup></li>
+      <li class="reveal"><strong>Tom Clancy.</strong> 100 million copies in print,<sup class="fn"><a data-fn="17" href="#fn-17">17</a></sup> $788 million in theatrical box office,<sup class="fn"><a data-fn="8" href="#fn-8">8</a></sup> and a video game portfolio – Rainbow Six, Ghost Recon, Splinter Cell, The Division – that has sold 114 million units and generated over €1 billion in revenue.<sup class="fn"><a data-fn="18" href="#fn-18">18</a></sup> On television, Amazon's <em>Jack Ryan</em> became one of Prime Video's flagship series. Clancy's IP was a key driver of the MGM acquisition.<sup class="fn"><a data-fn="16" href="#fn-16">16</a></sup></li>
+      <li class="reveal"><strong>Robert Ludlum / Jason Bourne.</strong> Ludlum's 500 million copies in print spawned a $1.64 billion film franchise.<sup class="fn"><a data-fn="19" href="#fn-19">19</a></sup> In 2025, NBCUniversal acquired all Bourne rights in perpetuity after seven competitive bids.<sup class="fn"><a data-fn="20" href="#fn-20">20</a></sup></li>
+      <li class="reveal"><strong>John Grisham.</strong> 300 million copies sold and 37 consecutive #1 bestsellers,<sup class="fn"><a data-fn="21" href="#fn-21">21</a></sup> adapted into some of the most commercially successful legal thrillers in history.</li>
+      <li class="reveal"><strong>Jack Carr.</strong> Navy SEAL produced <em>The Terminal List</em>, which generated 1.6 billion viewing minutes in its first week on Amazon – the platform's #1 series at launch.<sup class="fn"><a data-fn="22" href="#fn-22">22</a></sup></li>
+      <li class="reveal"><strong>Le Bureau des Légendes.</strong> Creator Eric Rochant spent years embedded with France's DGSE (foreign intelligence) and maintained advisory relationships with active personnel throughout production. Five seasons, widely regarded as the best espionage series ever made, sold internationally on modest budgets. Paramount+ is now adapting it as <em>The Agency</em> with Michael Fassbender.</li>
+    </ul>
+    <span class="fn-inline" id="inline-15"></span><span class="fn-inline" id="inline-16"></span><span class="fn-inline" id="inline-17"></span><span class="fn-inline" id="inline-18"></span><span class="fn-inline" id="inline-19"></span><span class="fn-inline" id="inline-20"></span><span class="fn-inline" id="inline-21"></span><span class="fn-inline" id="inline-22"></span>
+
+    <p class="reveal">Authentic sourcing also carries a civilizational argument – about power, institutions, and the cost of violence. Reagan called <em>The Hunt for Red October</em> "the perfect yarn" and it shaped Cold War policy:<sup class="fn"><a data-fn="23" href="#fn-23">23</a></sup></p>
+    <span class="fn-inline" id="inline-23"></span>
+
+    <blockquote class="reveal">
+      "[Clancy] didn't invent impossible schemes. He invented things that could happen. Some things that actually have happened over the years bear some resemblance to scenarios that he put together. Tom could sense things and see things in a way that others couldn't."
+      <cite>— Colin Powell<sup class="fn"><a data-fn="24" href="#fn-24">24</a></sup></cite>
+    </blockquote>
+    <span class="fn-inline" id="inline-24"></span>
+
+    <p class="reveal">Audiences learned to trust the name, which reduced acquisition cost, improved performance, and made each subsequent release more valuable than the last.</p>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">04</h2>
+    <div class="section-title reveal">Our Unfair Advantage</div>
+    <p class="reveal">OXBRIER can exploit this opportunity without the debt, the dilettantes, or the dysfunction:</p>
+
+    <h3 class="subhead reveal">Brand</h3>
+    <p class="reveal">A24 is valued at $3.5 billion<sup class="fn"><a data-fn="25" href="#fn-25">25</a></sup> because audiences recognize the brand before they recognize any single title. OXBRIER is building the equivalent signal for adult thrillers rooted in operational reality – a curatorial identity that reduces marketing cost, improves opening performance, and compounds with every release.</p>
+    <span class="fn-inline" id="inline-25"></span>
+
+    <h3 class="subhead reveal">Material</h3>
+    <p class="reveal">Our exclusive network inside defense, intelligence, and national security is the sourcing mechanism that feeds the brand material no one else can get. Studios cannot replicate this organically.</p>
+
+    <h3 class="subhead reveal">Team</h3>
+    <p class="reveal">Jev Valles (West Point, UTA, 42), Colin Nagy (Global Head of Brand, Instagram/Threads), and Chris Papasadero (Green Beret, serial founder). Curatorial credibility, brand discipline, and studio-grade expertise.</p>
+
+    <h3 class="subhead reveal">Talent</h3>
+    <p class="reveal">Post-strike, Hollywood employment remains well below pre-2023 levels.<sup class="fn"><a data-fn="26" href="#fn-26">26</a></sup> Strong material draws strong attachments – at favorable terms.</p>
+    <span class="fn-inline" id="inline-26"></span>
+
+    <h3 class="subhead reveal">Disciplined Economics</h3>
+    <p class="reveal">Pre-sales, tax incentives, and gap financing cover the majority of each production budget before equity is deployed; Blumhouse produced $5 billion in box office on $204 million in combined costs.<sup class="fn"><a data-fn="27" href="#fn-27">27</a></sup></p>
+    <span class="fn-inline" id="inline-27"></span>
+
+    <h3 class="subhead reveal">Library</h3>
+    <p class="reveal">Each OXBRIER release adds to a library that compounds across format and time. Institutional capital now treats entertainment IP as a standalone asset class – Ackman just bid $64 billion for Universal Music Group<sup class="fn"><a data-fn="28" href="#fn-28">28</a></sup> and Shamrock Capital raised a $400M fund for content IP alone.<sup class="fn"><a data-fn="29" href="#fn-29">29</a></sup></p>
+    <span class="fn-inline" id="inline-28"></span><span class="fn-inline" id="inline-29"></span>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">05</h2>
+    <div class="section-title reveal">Our Slate</div>
+    <p class="reveal">Our slate currently holds a dozen fully-developed properties spanning the genre. Topics include corporate espionage, extraordinary rendition, and psychological warfare.</p>
+    <p class="reveal">All were inbound sourced – from the Pentagon, the three-letter agencies, defense contractors, national security reporters, and international criminals. Most are based on the real story behind the headlines, and several have triggered FOIA requests.</p>
+    <p class="reveal">Three projects from this slate will move to production during the fund period.</p>
+  </section>
+
+  <section class="block">
+    <h2 class="reveal">06</h2>
+    <div class="section-title reveal">Key Takeaways</div>
+    <ol class="takeaways">
+      <li class="reveal">Studios are structurally incapable of serving this category.</li>
+      <li class="reveal">The audience is massive and underserved.</li>
+      <li class="reveal">Brand authority built on authentic material is a compounding asset.</li>
+      <li class="reveal">OXBRIER has the sourcing network, curatorial discipline, and the slate strategy to dominate the territory.</li>
+    </ol>
+
+    <p class="reveal contact-lede">Thank you. For access to the confidential document set or to set a meeting, please contact:</p>
+
+    <div class="sig reveal">
+      Chris Papasadero<br>
+      <a href="mailto:chris@oxbrier.com">chris@oxbrier.com</a><br>
+      <a href="https://calendly.com/papasadero" target="_blank" rel="noopener">calendly.com/papasadero</a><br>
+      <a href="tel:+15032301741">+1 503 230-1741</a>
+    </div>
+  </section>
+
+  <section class="block sources" id="sources">
+    <h2 class="reveal">07</h2>
+    <div class="section-title reveal">Sources</div>
+    <ol>
+      <li id="fn-1"><span><a href="https://www.cnn.com/2022/02/26/entertainment/mid-budget-movie-decline-cec/index.html" target="_blank" rel="noopener">CNN, Feb 2022; Follows, 2017.</a></span></li>
+      <li id="fn-2"><span><a href="https://seekingalpha.com/article/4766141-warner-bros-discovery-debt-down-4-2-billion-in-2024-more-to-do" target="_blank" rel="noopener">WBD Q4/FY2024 earnings, Feb 2025.</a></span></li>
+      <li id="fn-3"><span><a href="https://variety.com/2024/biz/news/paramount-debt-junk-skydance-deal-moodys-1236063628/" target="_blank" rel="noopener">Variety, March 2024.</a></span></li>
+      <li id="fn-4"><span><a href="https://www.sec.gov/Archives/edgar/data/0001744489/000174448924000276/dis-20240928.htm" target="_blank" rel="noopener">Disney 10-K, FY2024.</a></span></li>
+      <li id="fn-5"><span><a href="https://harpers.org/archive/2024/05/the-life-and-death-of-hollywood-daniel-bessner/" target="_blank" rel="noopener">Harper's, May 2024.</a></span></li>
+      <li id="fn-6"><span><a href="https://movieweb.com/2024-box-office-top-10-all-sequels/" target="_blank" rel="noopener">MovieWeb, 2024.</a></span></li>
+      <li id="fn-7"><span><a href="https://www.indiewire.com/news/analysis/paramounts-warner-bros-deal-debt-at-the-center-of-hollywood-1235182206/" target="_blank" rel="noopener">IndieWire, March 2026.</a></span></li>
+      <li id="fn-8"><span><a href="https://www.boxofficemojo.com/year/world/" target="_blank" rel="noopener">Box Office Mojo.</a></span></li>
+      <li id="fn-9"><span><a href="https://www.filmtake.com/streaming/streaming-content-strategy-global-ambitions-meet-economic-realities/" target="_blank" rel="noopener">Ampere Analysis via Film Take, 2024.</a></span></li>
+      <li id="fn-10"><span><a href="https://variety.com/2025/tv/news/reacher-season-3-ratings-1236336510/" target="_blank" rel="noopener">Variety, Feb 2025.</a></span></li>
+      <li id="fn-11"><span><a href="https://variety.com/2025/tv/news/the-night-agent-season-2-ratings-netflix-views-1236288865/" target="_blank" rel="noopener">Variety, Jan 2025.</a></span></li>
+      <li id="fn-12"><span><a href="https://collider.com/apple-tv-spy-thriller-slow-horses-streaming-success-february-2026/" target="_blank" rel="noopener">Collider, Feb 2026.</a></span></li>
+      <li id="fn-13"><span><a href="https://deadline.com/2025/03/hollywood-box-office-negative-feedback-loop-wall-street-1236351034/" target="_blank" rel="noopener">TD Cowen via Deadline, March 2025.</a></span></li>
+      <li id="fn-14"><span><a href="https://www.axios.com/2022/08/16/r-rate-movies-box-office" target="_blank" rel="noopener">Axios, Aug 2022.</a></span></li>
+      <li id="fn-15"><span><a href="https://uk.finance.yahoo.com/news/james-bond-movie-really-made-130000482.html" target="_blank" rel="noopener">Yahoo Finance, 2024.</a></span></li>
+      <li id="fn-16"><span><a href="https://variety.com/2022/film/news/amazon-mgm-james-bond-whats-next-1235208070/" target="_blank" rel="noopener">Variety, March 2022.</a></span></li>
+      <li id="fn-17"><span><a href="https://www.thefiscaltimes.com/Articles/2013/10/03/Tom-Clancy-Bestselling-Author-Numbers" target="_blank" rel="noopener">The Fiscal Times, Oct 2013.</a></span></li>
+      <li id="fn-18"><span><a href="https://gameworldobserver.com/2024/10/31/ubisoft-six-franchises-with-revenue-over-1-billion" target="_blank" rel="noopener">Game World Observer, Oct 2024.</a></span></li>
+      <li id="fn-19"><span><a href="https://www.boxofficemojo.com/franchise/fr3561459461/" target="_blank" rel="noopener">Box Office Mojo.</a></span></li>
+      <li id="fn-20"><span><a href="https://www.nbcuniversal.com/article/nbcuniversal-acquires-robert-ludlums-iconic-bourne-and-treadstone-series" target="_blank" rel="noopener">NBCUniversal, 2025.</a></span></li>
+      <li id="fn-21"><span><a href="https://www.accio.com/business/how-many-best-selling-books-has-john-grisham-sold" target="_blank" rel="noopener">Accio, 2024.</a></span></li>
+      <li id="fn-22"><span><a href="https://www.officialjackcarr.com/tv-series/" target="_blank" rel="noopener">Official Jack Carr.</a></span></li>
+      <li id="fn-23"><span><a href="https://www.usnews.com/news/blogs/washington-whispers/2013/10/02/ronald-reagan-responsible-for-tom-clancys-rise" target="_blank" rel="noopener">U.S. News, Oct 2013.</a></span></li>
+      <li id="fn-24"><span><a href="https://time.com/archive/6644176/tom-clancy/" target="_blank" rel="noopener">Time, Oct 2013.</a></span></li>
+      <li id="fn-25"><span><a href="https://variety.com/2024/film/news/a24-funding-josh-kushner-thrive-capital-1236048525/" target="_blank" rel="noopener">Variety, June 2024.</a></span></li>
+      <li id="fn-26"><span><a href="https://www.npr.org/2025/07/29/nx-s1-5420787/where-things-stand-two-years-after-the-hollywood-actors-and-writers-strike" target="_blank" rel="noopener">Otis College via NPR, July 2025.</a></span></li>
+      <li id="fn-27"><span><a href="https://deadline.com/2025/12/box-office-blumhouse-atomic-monster-billion-2025-1236655012/" target="_blank" rel="noopener">Deadline, Dec 2025.</a></span></li>
+      <li id="fn-28"><span><a href="https://deadline.com/2026/04/universal-music-takeover-bill-ackman-pershing-square-1236783291/" target="_blank" rel="noopener">Deadline, April 2026.</a></span></li>
+      <li id="fn-29"><span><a href="https://deadline.com/2025/07/shamrock-capital-400-million-content-investment-fund-entertainment-ip-1202991053/" target="_blank" rel="noopener">Deadline, July 2020.</a></span></li>
+    </ol>
+  </section>
+
+</main>
+
+<script>
+  // Progress bar + % readout
+  const bar = document.getElementById('progbar');
+  const pct = null;
+  const hint = null;
+
+  // Title-page parallax elements
+  const cover = document.getElementById('cover');
+  const coverTitle = document.getElementById('coverTitle');
+  const coverKnife = document.getElementById('coverKnife');
+  const coverScrollhint = document.getElementById('coverScrollhint');
+  const coverMeta = null;
+
+  // Progress bar starts once section 01 (The Problem is Structural) reaches the top
+  const firstSection = document.querySelector('section.block');
+  const progressEl = document.querySelector('.progress');
+
+  function onScroll(){
+    const h = document.documentElement;
+    const y = h.scrollTop;
+
+    // Progress range: from when firstSection top hits viewport top -> document end
+    let p = 0;
+    let barVisible = false;
+    if(firstSection){
+      const startY = firstSection.offsetTop; // distance from top of document
+      const endY = h.scrollHeight - h.clientHeight;
+      if(y >= startY){
+        barVisible = true;
+        p = Math.max(0, Math.min(1, (y - startY) / Math.max(1, endY - startY)));
+      }
+    } else {
+      // fallback: whole-page scroll
+      p = Math.max(0, Math.min(1, y / (h.scrollHeight - h.clientHeight)));
+      barVisible = true;
+    }
+    bar.style.width = (p*100).toFixed(1) + '%';
+    if(progressEl){
+      progressEl.style.opacity = barVisible ? '1' : '0';
+    }
+
+    // Title-page parallax
+    const vh = h.clientHeight;
+    const t = Math.max(0, Math.min(1, y / vh)); // 0 at top, 1 when scrolled one screen
+
+    // OXBRIER title + scroll hint: fade at the SAME rate tied to scroll
+    const titleOpacity = Math.max(0, 1 - t * 1.4);
+    if(coverTitle){
+      coverTitle.style.opacity = titleOpacity;
+    }
+    if(coverScrollhint){
+      coverScrollhint.style.opacity = titleOpacity;
+    }
+
+    // Knife: stays fixed in the viewport, slowly rises (drifts up) as you scroll,
+    // fades out based on Executive Summary heading position.
+    if(coverKnife){
+      // slow upward drift — rises with the reader, doesn't plunge
+      // Uses raw scroll distance (not clamped t) so it keeps rising past the cover.
+      const drift = -Math.min(y, vh * 2.5) * 0.08;
+      coverKnife.style.transform = `translateY(${drift}px) scale(${1 - Math.min(t, 1) * 0.02})`;
+
+      // knife opacity based on Executive Summary heading position
+      let knifeOpacity = 1;
+      const exec = document.getElementById('execSummaryTitle');
+      if(exec){
+        const rect = exec.getBoundingClientRect();
+        // when heading top is at vh (entering) -> opacity 1
+        // when heading top is at vh * 0.25 (75% up the screen) -> opacity 0
+        const fadeStart = vh;         // heading entering viewport
+        const fadeEnd   = vh * 0.25;  // heading 75% up the screen
+        const span = fadeStart - fadeEnd;
+        if(rect.top >= fadeStart){
+          knifeOpacity = 1;
+        } else if(rect.top <= fadeEnd){
+          knifeOpacity = 0;
+        } else {
+          knifeOpacity = (rect.top - fadeEnd) / span;
+        }
+      } else {
+        knifeOpacity = Math.max(0, 1 - t);
+      }
+      coverKnife.style.opacity = knifeOpacity;
+    }
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Wrap each section's h2 + .section-title in a sticky header
+  document.querySelectorAll('section.block').forEach(section=>{
+    const h2 = section.querySelector(':scope > h2');
+    const title = h2 && h2.nextElementSibling;
+    if(!h2 || !title || !title.classList.contains('section-title')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'sticky-head';
+    h2.parentNode.insertBefore(wrap, h2);
+    wrap.appendChild(h2);
+    wrap.appendChild(title);
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Chart reveal
+  const chartIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        chartIO.unobserve(e.target);
+      }
+    });
+  }, {rootMargin:'0px 0px -10% 0px', threshold:0.3});
+  document.querySelectorAll('.reveal-chart').forEach(el=>chartIO.observe(el));
+
+  // Footnote popover — single shared node, repositions on each click
+  const sourceText = {};
+  document.querySelectorAll('.sources li').forEach((li,i)=>{
+    sourceText[i+1] = li.querySelector('span').innerHTML;
+  });
+
+  // Create popover
+  const pop = document.createElement('div');
+  pop.className = 'fn-pop';
+  pop.setAttribute('role','dialog');
+  pop.setAttribute('aria-hidden','true');
+  document.body.appendChild(pop);
+
+  let activeAnchor = null;
+  let lastScrollY = window.scrollY;
+
+  function closePop(){
+    pop.classList.remove('open');
+    pop.setAttribute('aria-hidden','true');
+    if(activeAnchor){
+      activeAnchor.classList.remove('fn-active');
+      activeAnchor = null;
+    }
+  }
+
+  function openPop(anchor, n){
+    // Fill content
+    pop.innerHTML =
+      '<div class="fn-pop__body">' +
+        '<span class="fn-pop__num">['+n+']</span>' +
+        sourceText[n] +
+      '</div>' +
+      '<div class="fn-pop__foot">' +
+        '<button class="fn-pop__jump" type="button">jump to sources \u2193</button>' +
+        '<button class="fn-pop__close" type="button" aria-label="Close">close \u2715</button>' +
+      '</div>';
+
+    // Force-open ALL links in new tab + style
+    pop.querySelectorAll('.fn-pop__body a').forEach(a=>{
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+
+    // Wire buttons
+    pop.querySelector('.fn-pop__jump').addEventListener('click', ()=>{
+      const src = document.getElementById('fn-'+n);
+      closePop();
+      if(src){
+        src.scrollIntoView({behavior:'smooth', block:'center'});
+        src.classList.add('flash');
+        setTimeout(()=>src.classList.remove('flash'), 1600);
+      }
+    });
+    pop.querySelector('.fn-pop__close').addEventListener('click', closePop);
+
+    // Position — pre-measure by making visible-but-transparent
+    pop.classList.add('open');
+    pop.setAttribute('aria-hidden','false');
+
+    const rect = anchor.getBoundingClientRect();
+    const popRect = pop.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const margin = 12;
+
+    // Prefer below the anchor; if not enough room, place above
+    let placement = 'bottom';
+    let top = rect.bottom + 10;
+    if(top + popRect.height > vh - margin && rect.top - popRect.height - 10 > margin){
+      placement = 'top';
+      top = rect.top - popRect.height - 10;
+    }
+
+    // Horizontally: align popover's pointer with the anchor, but clamp within viewport
+    let left = rect.left - 16; // pointer sits 20px in from popover left
+    left = Math.max(margin, Math.min(left, vw - popRect.width - margin));
+
+    pop.style.top = top + 'px';
+    pop.style.left = left + 'px';
+    pop.dataset.placement = placement;
+
+    // Active state on the anchor
+    activeAnchor = anchor;
+    anchor.classList.add('fn-active');
+    // Remember scroll position so we can auto-close on big scroll
+    lastScrollY = window.scrollY;
+  }
+
+  document.querySelectorAll('sup.fn a').forEach(a=>{
+    a.addEventListener('click', (ev)=>{
+      ev.preventDefault();
+      ev.stopPropagation();
+      const n = a.dataset.fn;
+      // Same anchor? toggle closed
+      if(activeAnchor === a){
+        closePop();
+        return;
+      }
+      // Different anchor (or none): close then open fresh
+      if(activeAnchor) closePop();
+      openPop(a, n);
+    });
+  });
+
+  // Dismiss: click outside, Esc, scroll
+  document.addEventListener('click', (ev)=>{
+    if(!activeAnchor) return;
+    if(pop.contains(ev.target)) return;
+    if(ev.target.closest('sup.fn')) return;
+    closePop();
+  });
+  document.addEventListener('keydown', (ev)=>{
+    if(ev.key === 'Escape' && activeAnchor) closePop();
+  });
+  let lastScrollY2 = 0;
+  document.addEventListener('scroll', ()=>{
+    if(!activeAnchor) return;
+    if(Math.abs(window.scrollY - lastScrollY) > 80){
+      closePop();
+    }
+  }, {passive:true});
+
+</script>
+</body>
+</html>
