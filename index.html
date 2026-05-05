@@ -40,10 +40,11 @@
     }
   }
   *{box-sizing:border-box}
-  html{margin:0;padding:0;background:var(--bg);color:var(--ink);}
+  html{margin:0;padding:0;background:var(--bg);color:var(--ink);overscroll-behavior:none;}
   body{
     margin:0;padding:0;
     overflow-x:hidden;
+    overscroll-behavior:none;
     background:var(--bg);color:var(--ink);
     transition:background-color .25s ease;
     font-family:'Source Serif 4', 'Newsreader', Georgia, serif;
@@ -83,7 +84,7 @@
   /* Cover — red panel */
   .cover{
     position:relative;
-    height:100vh;
+    height:110vh;
     width:100%;
     background:transparent;
     z-index:1;
@@ -117,10 +118,11 @@
     letter-spacing:-0.045em;
     color:#000;
     white-space:nowrap;
+    transform:translateY(-20%);
   }
   .cover__bottom{
     position:absolute;
-    bottom:36px;
+    bottom:calc(10vh + 36px);
     left:0;right:0;
     text-align:center;
     z-index:2;
@@ -176,7 +178,7 @@
     }
     .cover__bottom{
       bottom:auto;
-      top:calc(43% + 9vw);
+      top:calc(43% + 9vw - 5vh);
     }
   }
 
@@ -266,6 +268,28 @@
   }
   .kt-label{
     color:var(--accent);
+  }
+  .contact-cta{
+    text-align:center;
+    margin-top:1.4em;
+  }
+  .contact-btn{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    padding:.85em 2.2em;
+    border-radius:999px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border:none;
+    transition:opacity .15s ease, transform .15s ease;
+  }
+  .contact-btn:hover{
+    opacity:.88;
+    transform:translateY(-1px);
   }
   .legal-notice{
     margin:6em 0 0;
@@ -552,6 +576,7 @@
   /* Contact block */
   .contact-lede{
     margin-top:2.2em;
+    text-align:center;
   }
 
   @media (max-width:640px){
@@ -632,7 +657,7 @@
   <!-- BRAND STRATEGY -->
   <section class="block">
     <div class="section-title reveal">Brand Strategy</div>
-    <p class="reveal">We build a direct relationship with our audience through editorial content. Anchored on Substack and distributed across social feeds and podcasts, the platform covers tradecraft, hardware, and dispatches from the field – with long-form analysis on the truth behind the headlines. When a classified operation makes the news, we're publishing insider commentary within hours.</p>
+    <p class="reveal">Oxbrier has a direct relationship with our audience through editorial content. Anchored on Substack and distributed across social feeds and podcasts, the platform covers tradecraft, hardware, and dispatches from the field – with long-form analysis on the truth behind the headlines. When a classified operation makes the news, we're publishing insider commentary within hours.</p>
 
     <figure class="reveal media">
       <img src="assets/gtsmile.gif" alt="" loading="lazy">
@@ -669,7 +694,10 @@
     <p class="reveal"><span class="kt-label">Traction.</span> $22M action-thriller produced by Mandalay/Sony in theaters this November. Finished product with major studio distribution.</p>
     <p class="reveal"><span class="kt-label">Return Thesis.</span> A compounding platform. Proprietary supply + owned audience + appreciating library + brand equity = A24 trajectory ($3.5B) in a genre with $20B franchise precedents and zero credible competitors.</p>
 
-    <p class="reveal contact-lede">For confidential materials including full PPM and slate, contact <a href="mailto:chris&#64;oxbrier&#46;com">chris&#64;oxbrier&#46;com</a>.</p>
+    <p class="reveal contact-lede">Confidential materials including full PPM and slate are available.</p>
+    <div class="reveal contact-cta">
+      <a class="contact-btn" href="mailto:chris&#64;oxbrier&#46;com">Contact</a>
+    </div>
   </section>
 
   <!-- FOUNDERS -->
@@ -793,7 +821,7 @@
 
   // Tunables
   const BG_LAG     = 0.18;  // red panel drifts down at 18% of scroll (parallax depth)
-  const SMOOTH     = 0.18;  // scroll lerp (higher = snappier, lower = silkier)
+  const SMOOTH     = 1.0;   // 1.0 = no lerp, transforms track scroll directly (no trailing motion)
   const KNIFE_LAG  = 0.35;  // knife scrolls 35% slower than the page (background depth)
   const KNIFE_FADE = 0.75;  // knife fully faded by 75% of viewport scroll
   const KNIFE_BASE = 0.80;  // base opacity at rest (subtle, 20% transparent)
