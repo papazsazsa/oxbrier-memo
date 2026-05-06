@@ -167,18 +167,27 @@
     .cover__titlewrap{top:48%;}
   }
   @media (min-width:761px){
+    .cover{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:stretch;
+    }
     .cover__title{
       font-size:clamp(80px, 8vw, 140px) !important;
       letter-spacing:-0.04em;
     }
-    .cover__knife{top:50%;}
+    .cover__knife{top:50vh;}
     .cover__titlewrap{
+      position:static;
       transform:none;
       text-align:center;
     }
     .cover__bottom{
+      position:static;
       bottom:auto;
-      top:calc(43% + 9vw - 5vh);
+      top:auto;
+      margin-top:1em;
     }
   }
 
