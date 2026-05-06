@@ -350,6 +350,10 @@
   .tbl-films{min-width:920px;}
   /* Second table (editorial): wide enough that cells wrap to ~3 lines max */
   .tbl-editorial{min-width:1000px;}
+  /* Key Takeaways comparison table: 3 columns, modest breakout */
+  .tbl-takeaways{min-width:760px;}
+  .tbl-takeaways th:first-child{width:14%;}
+  .tbl-takeaways td:first-child{white-space:nowrap;}
   table{
     width:100%;border-collapse:collapse;
     font-family:'JetBrains Mono',monospace;
@@ -677,6 +681,20 @@
   <!-- KEY TAKEAWAYS -->
   <section class="block section-band">
     <div class="section-title reveal">Key Takeaways</div>
+
+    <div class="tbl-wrap tbl-wide reveal">
+      <table class="tbl-takeaways">
+        <thead><tr><th></th><th>Incumbents</th><th>Oxbrier</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Development</strong></td><td>Risk-averse</td><td>Warfighter-led</td></tr>
+          <tr><td><strong>Production</strong></td><td>Loaded cost base</td><td>Cost-effective, genre focused</td></tr>
+          <tr><td><strong>Distribution</strong></td><td>Channel captives/rented audience</td><td>Optionality: partner today, D2C tomorrow</td></tr>
+          <tr><td><strong>Marketing</strong></td><td>Opex (CAC &gt; LTV)</td><td>Capex (LTV &gt; CAC)</td></tr>
+          <tr><td><strong>Valuation</strong></td><td>Debt-funded extraction at distress multiples</td><td>Compounding at platform multiples</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <p class="reveal"><span class="kt-label">Market Conviction.</span> Incumbents abandoned mid-budget film while audience demand for the genre is growing. The gap is structural and permanent.</p>
     <p class="reveal"><span class="kt-label">Asymmetric Economics.</span> $3–30M budgets with package discounts, pre-sales, tax credits, and gap covering most of each film before equity deploys. Downside capped, upside uncapped (American Sniper: $58M in, $548M out).</p>
     <p class="reveal"><span class="kt-label">Team-Market Fit.</span> The founders' specific knowledge – military service, studio production, global brand strategy – can't be hired or bought. The business compounds that knowledge through leverage and every release deepens the moat.</p>
