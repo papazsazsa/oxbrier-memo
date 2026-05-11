@@ -461,6 +461,19 @@
   }
   .fn-pop__head .fn-pop__close{color:var(--accent);}
   .fn-pop__head .fn-pop__close:hover{color:#fff;}
+  .fn-pop__head-left{
+    display:flex;align-items:center;gap:8px;min-width:0;flex:1;
+  }
+  .fn-pop__head .fn-pop__title{
+    color:var(--accent);
+    font-size:10px;
+    letter-spacing:.12em;
+    font-weight:600;
+    text-transform:uppercase;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
   .fn-pop__sources{display:flex;flex-direction:column;}
   .fn-pop__source{
     display:block;
@@ -922,6 +935,33 @@
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   // Footnote popover
+  // Slug map (footnote number → kebab-case slug from markdown source)
+  const FN_SLUGS = {
+    1:'incumbent-debt', 2:'midbudget-collapse', 3:'audience-demand',
+    4:'pna-equals-production', 5:'streaming-losses', 6:'a24-val',
+    7:'franchise-data', 8:'clancy-total', 9:'reagan-clancy', 10:'powell-clancy',
+    11:'heat-cast', 12:'heat-sas', 13:'ip-asset-class', 14:'pacino-rate',
+    15:'margin-call-scale', 16:'cooper-backend', 17:'opp-cuts',
+    18:'owned-distribution', 19:'editorial-credentials', 20:'monocle-retail',
+    21:'monocle-newsletter', 22:'a24-hbomax', 23:'free-press', 24:'pirate-wires',
+    25:'atlantic-solana', 26:'longlegs-box'
+  };
+  // Manual overrides for slugs that don't auto-derive cleanly
+  const FN_TITLE_OVERRIDES = {
+    'a24-val':'A24 Valuation',
+    'powell-clancy':'Elite Influence',
+    'clancy-total':'Clancyverse',
+    'opp-cuts':'Prestige Cast',
+    'heat-sas':'SAS Training',
+    'pna-equals-production':'Marketing Math'
+  };
+  function fnTitle(n){
+    const slug = FN_SLUGS[n];
+    if(!slug) return '';
+    if(FN_TITLE_OVERRIDES[slug]) return FN_TITLE_OVERRIDES[slug];
+    return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  }
+
   const sourceText = {};
   document.querySelectorAll('.sources li').forEach((li,i)=>{
     const stack = li.querySelector('.fn-pop__sources');
@@ -955,7 +995,10 @@
     const raw = sourceText[n] || '';
     pop.innerHTML =
       '<div class="fn-pop__head">' +
-        '<span class="fn-pop__num">['+n+']</span>' +
+        '<div class="fn-pop__head-left">' +
+          '<span class="fn-pop__num">['+n+']</span>' +
+          '<span class="fn-pop__title">'+fnTitle(n)+'</span>' +
+        '</div>' +
         '<div class="fn-pop__head-right">' +
           '<button class="fn-pop__jump" type="button">jump to sources ↓</button>' +
           '<button class="fn-pop__close" type="button" aria-label="Close">close ✕</button>' +
