@@ -115,15 +115,16 @@
   .cover__title{
     display:block;
     margin:0;
-    text-align:center;
-    line-height:0;
+    font-family:'Nova Mono',monospace;
+    font-weight:400;
+    font-stretch:100%;
+    font-size:10vw;
+    line-height:.88;
+    letter-spacing:-0.045em;
+    color:#000;
+    white-space:nowrap;
+    text-transform:uppercase;
     transform:translateY(-20%);
-  }
-  .cover__title img{
-    display:inline-block;
-    height:7vw;
-    width:auto;
-    max-width:100%;
   }
   .cover__bottom{
     position:absolute;
@@ -167,7 +168,7 @@
     opacity:0.5;
   }
   @media (max-width:760px){
-    .cover__title img{height:8vw;}
+    .cover__title{letter-spacing:-0.05em;}
     .cover__tagline{
       font-size:clamp(12px,3.15vw,18px);
       transform:translateY(100%);
@@ -182,8 +183,9 @@
       align-items:stretch;
       padding-top:6vw;
     }
-    .cover__title img{
-      height:clamp(63px, 6.3vw, 110px);
+    .cover__title{
+      font-size:clamp(90px, 9vw, 158px) !important;
+      letter-spacing:-0.04em;
     }
     .cover__knife{top:50vh;}
     .cover__titlewrap{
@@ -459,19 +461,6 @@
   }
   .fn-pop__head .fn-pop__close{color:var(--accent);}
   .fn-pop__head .fn-pop__close:hover{color:#fff;}
-  .fn-pop__head-left{
-    display:flex;align-items:center;gap:8px;min-width:0;flex:1;
-  }
-  .fn-pop__head .fn-pop__title{
-    color:var(--accent);
-    font-size:10px;
-    letter-spacing:.12em;
-    font-weight:600;
-    text-transform:uppercase;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
   .fn-pop__sources{display:flex;flex-direction:column;}
   .fn-pop__source{
     display:block;
@@ -602,7 +591,7 @@
 
 <section class="cover" id="cover">
   <div class="cover__titlewrap">
-    <h1 class="cover__title" id="coverTitle"><img src="assets/logo.png" alt="OXBRIER"></h1>
+    <h1 class="cover__title" id="coverTitle">Oxbrier</h1>
   </div>
   <img class="cover__knife" id="coverKnife" src="assets/knife_red.jpg" alt="" aria-hidden="true">
   <div class="cover__bottom">
@@ -616,35 +605,33 @@
 
   <!-- OPENING -->
   <header class="hero">
-    <p class="lede">The commercial thriller was once one of Hollywood's core products: grounded, adult stories with a strong point of view and enough authenticity to pull audiences into a hidden world. When made with credibility and disciplined economics, these stories still attract audiences.<sup class="fn"><a data-fn="1" href="#fn-1">1</a></sup></p>
-    <p class="lede" style="margin-top:0.75em;">OXBRIER makes grounded thrillers for the thinking man: military science, international espionage, and the criminal underworld.</p>
-    <p class="lede" style="margin-top:0.75em;">We're industry and military veterans – <em style="color:var(--accent)">authenticity is our brand</em> – because it's the most powerful predictor of success in the genre. A24 reached $3.5B by making taste the product;<sup class="fn"><a data-fn="2" href="#fn-2">2</a></sup> we're doing the same with deeper commercial demand and no credible competitor.</p>
-    <p class="lede" style="margin-top:0.75em;">We have traction: our $22M action-thriller produced by Mandalay/Sony will be in theaters this November, and we have twelve fully developed projects on the slate, all sourced from real-life operators, spies, and investigators in the field. Our endgame is category dominance: a direct relationship with the audience and total control over the territory we define.</p>
+    <p class="lede">OXBRIER makes thrillers for the thinking man: military science, international espionage, and the criminal underworld. We have traction and a proof-of-concept: our $22M action-thriller produced by Mandalay/Sony will be in theaters this November.</p>
+    <p class="lede" style="margin-top:0.75em;">OPPORTUNITY 1: Once considered cultural institutions, studios are now debt-servicing operations<sup class="fn"><a data-fn="1" href="#fn-1">1</a></sup> that happen to make content. The disappearance<sup class="fn"><a data-fn="2" href="#fn-2">2</a></sup> of mid-budget films is a result of tentpole logic – even as demand grows.<sup class="fn"><a data-fn="3" href="#fn-3">3</a></sup></p>
+    <p class="lede" style="margin-top:0.75em;">OPPORTUNITY 2: For incumbents, marketing costs are fixed: to succeed at the requisite scale, they must spend as much <em>marketing</em> a film as they do <em>making</em> it<sup class="fn"><a data-fn="4" href="#fn-4">4</a></sup> – only to see that investment evaporate after opening weekend. Over $25B in cumulative streaming losses since 2019<sup class="fn"><a data-fn="5" href="#fn-5">5</a></sup> prove that distribution can't build loyalty.</p>
+    <p class="lede" style="margin-top:0.75em;">We're industry and military veterans; <em style="color:var(--accent)">authenticity is our brand.</em> It's the most powerful predictor of critical, cultural, and commercial success in the thriller genre.</p>
+    <p class="lede" style="margin-top:0.75em;">A24 reached $3.5B by making taste the product;<sup class="fn"><a data-fn="6" href="#fn-6">6</a></sup> we're doing the same in a genre with deeper commercial demand and no credible competitor. We have twelve fully developed projects on the slate, all inbound-sourced from operators, spies, and investigators in the field.</p>
+    <p class="lede" style="margin-top:0.75em;">Our endgame is category dominance: a direct relationship with the audience and total control over the territory we define.</p>
   </header>
 
-  <!-- WE OWN THE SUPPLY -->
+  <!-- CONTENT STRATEGY -->
   <section class="block">
-    <div class="section-title reveal">We Own the Supply</div>
-    <p class="reveal">Studios used to respect we who had been downrange, but their economics<sup class="fn"><a data-fn="3" href="#fn-3">3</a></sup> and their cultural relevance means they've resorted to carpet bombing.<sup class="fn"><a data-fn="4" href="#fn-4">4</a></sup> Original stories are outside the system – hidden in the souls of those who've lived it – and the audience is desperate<sup class="fn"><a data-fn="1" href="#fn-1">1</a></sup> for original stories, told by their generation's heroes.</p>
-
-    <p class="reveal">OXBRIER will create a new library of bankable, franchise-starting thrillers on the basis that <em>authentic material</em> has produced the largest, most durable franchises in entertainment.</p>
-
-    <p class="reveal">Fleming/Bond. Ludlum/Bourne. Crichton/Jurassic Park.<sup class="fn"><a data-fn="5" href="#fn-5">5</a></sup> Tom Clancy alone represents an estimated $20B across publishing, film, television, and gaming<sup class="fn"><a data-fn="6" href="#fn-6">6</a></sup> and has influenced presidents and policymakers.<sup class="fn"><a data-fn="7" href="#fn-7">7</a></sup></p>
+    <div class="section-title reveal">Product Strategy</div>
+    <p class="reveal">Authentic material has produced the largest, most durable franchises in entertainment. Fleming/Bond. Ludlum/Bourne. Crichton/Jurassic Park.<sup class="fn"><a data-fn="7" href="#fn-7">7</a></sup> Tom Clancy alone represents an estimated $20B across publishing, film, television, and gaming<sup class="fn"><a data-fn="8" href="#fn-8">8</a></sup> and has influenced presidents and policymakers.<sup class="fn"><a data-fn="9" href="#fn-9">9</a></sup></p>
 
     <blockquote class="pull reveal">
       <p>"Clancy didn't invent impossible schemes. He invented things that could happen. Some things that actually have happened over the years bear some resemblance to scenarios that he put together. Tom could sense things and see things in a way that others couldn't."</p>
-      <cite>Colin Powell<sup class="fn"><a data-fn="8" href="#fn-8">8</a></sup></cite>
+      <cite>Colin Powell<sup class="fn"><a data-fn="10" href="#fn-10">10</a></sup></cite>
     </blockquote>
 
-    <p class="reveal">Authenticity enables prestige inside of a commercial genre, which attracts top talent. Michael Mann created <em>Heat</em> based on a detective's pursuit of the real Neil McCauley;<sup class="fn"><a data-fn="9" href="#fn-9">9</a></sup> Pacino and De Niro – the biggest cast pairing in history – came on for half their standard rate.</p>
+    <p class="reveal">Authenticity enables prestige inside of a commercial genre, which attracts top talent. Michael Mann created <em>Heat</em> based on a detective's pursuit of the real Neil McCauley;<sup class="fn"><a data-fn="11" href="#fn-11">11</a></sup> Pacino and De Niro – the biggest cast pairing in history – came on for half their standard rate.</p>
 
-    <p class="reveal">British SAS trained the cast for months;<sup class="fn"><a data-fn="10" href="#fn-10">10</a></sup> Val Kilmer's perfect mag change is still studied at police and military academies thirty years on.<sup class="fn"><a data-fn="10" href="#fn-10">10</a></sup></p>
+    <p class="reveal">British SAS trained the cast for months;<sup class="fn"><a data-fn="12" href="#fn-12">12</a></sup> Val Kilmer's perfect mag change is still studied at police and military academies thirty years on.<sup class="fn"><a data-fn="12" href="#fn-12">12</a></sup></p>
 
     <figure class="reveal media">
       <img src="assets/magchange.gif" alt="Val Kilmer's mag change in Heat (1995)" loading="lazy">
     </figure>
 
-    <p class="reveal">A strong package commands the capital stack; discounted rates from top talent, pre-sales, tax credits, and gap financing covers most of each film's budget before our equity deploys. With budget ceilings in the $3M – $30M range, Oxbrier's exposure is capped; we take a portfolio approach and treat IP as a bankable asset.<sup class="fn"><a data-fn="11" href="#fn-11">11</a></sup></p>
+    <p class="reveal">A strong package commands the capital stack; discounted rates from top talent, pre-sales, tax credits, and gap financing covers most of each film's budget before our equity deploys. With budget ceilings in the $3M – $30M range, Oxbrier's exposure is capped; we take a portfolio approach and treat IP as a bankable asset.<sup class="fn"><a data-fn="13" href="#fn-13">13</a></sup></p>
 
     <p class="reveal">Across formats and decades, films rooted in authentic material consistently outperform, bring together talented collaborators, and enjoy critical acclaim.</p>
 
@@ -652,31 +639,31 @@
       <table class="tbl-films">
         <thead><tr><th>Film</th><th>Source</th><th>Budget</th><th>Gross</th><th>Multiple</th><th>RT</th><th>Awards</th><th>Talent Discount</th></tr></thead>
         <tbody>
-          <tr><td>Heat (1995)</td><td>Detective memoir</td><td>$60M</td><td>$187M</td><td>~3x</td><td>84%</td><td>—</td><td>Pacino ~50% below quote<sup class="fn"><a data-fn="12" href="#fn-12">12</a></sup></td></tr>
+          <tr><td>Heat (1995)</td><td>Detective memoir</td><td>$60M</td><td>$187M</td><td>~3x</td><td>84%</td><td>—</td><td>Pacino ~50% below quote<sup class="fn"><a data-fn="14" href="#fn-14">14</a></sup></td></tr>
           <tr><td>Michael Clayton (2007)</td><td>Legal insider</td><td>$21.5M</td><td>$93M</td><td>~4x</td><td>91%</td><td>7n/1w</td><td>Clooney ~90%+ below quote</td></tr>
-          <tr><td>Margin Call (2011)</td><td>Wall Street insider</td><td>$3.5M</td><td>$19.5M</td><td>~5.6x</td><td>87%</td><td>1n</td><td>Ensemble at SAG scale<sup class="fn"><a data-fn="13" href="#fn-13">13</a></sup></td></tr>
+          <tr><td>Margin Call (2011)</td><td>Wall Street insider</td><td>$3.5M</td><td>$19.5M</td><td>~5.6x</td><td>87%</td><td>1n</td><td>Ensemble at SAG scale<sup class="fn"><a data-fn="15" href="#fn-15">15</a></sup></td></tr>
           <tr><td>Tinker Tailor Soldier Spy (2011)</td><td>MI6 novel</td><td>$21M</td><td>$81M</td><td>~4x</td><td>83%</td><td>3n</td><td>Ensemble below quote</td></tr>
           <tr><td>Argo (2012)</td><td>CIA operation</td><td>$44.5M</td><td>$232M</td><td>~5x</td><td>96%</td><td>7n/3w (BP)</td><td>—</td></tr>
-          <tr><td>American Sniper (2014)</td><td>Navy SEAL memoir</td><td>$58M</td><td>$548M</td><td>~9x</td><td>72%</td><td>6n/1w</td><td>Cooper waived upfront<sup class="fn"><a data-fn="14" href="#fn-14">14</a></sup></td></tr>
+          <tr><td>American Sniper (2014)</td><td>Navy SEAL memoir</td><td>$58M</td><td>$548M</td><td>~9x</td><td>72%</td><td>6n/1w</td><td>Cooper waived upfront<sup class="fn"><a data-fn="16" href="#fn-16">16</a></sup></td></tr>
           <tr><td>Sicario (2015)</td><td>Border DEA</td><td>$30M</td><td>$85M</td><td>~3x</td><td>93%</td><td>3n</td><td>Blunt below quote</td></tr>
-          <tr><td>Oppenheimer (2023)</td><td>Biography</td><td>$100M</td><td>$976M</td><td>~10x</td><td>93%</td><td>13n/7w (BP)</td><td>Ensemble ~60–80% below quote<sup class="fn"><a data-fn="15" href="#fn-15">15</a></sup></td></tr>
+          <tr><td>Oppenheimer (2023)</td><td>Biography</td><td>$100M</td><td>$976M</td><td>~10x</td><td>93%</td><td>13n/7w (BP)</td><td>Ensemble ~60–80% below quote<sup class="fn"><a data-fn="17" href="#fn-17">17</a></sup></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- WE CULTIVATE DEMAND -->
+  <!-- BRAND STRATEGY -->
   <section class="block">
-    <div class="section-title reveal">We Cultivate Demand</div>
-    <p class="reveal">The regime must spend as much <em>marketing</em> a tentpole as they do <em>making</em> it<sup class="fn"><a data-fn="16" href="#fn-16">16</a></sup> – and then that investment evaporates after opening weekend.<sup class="fn"><a data-fn="17" href="#fn-17">17</a></sup> Even when streaming turns a profit, it does so by extracting rent on a contracting renter base. Over $25B in cumulative streaming losses since 2019 prove that distribution can't build brand loyalty.<sup class="fn"><a data-fn="18" href="#fn-18">18</a></sup></p>
-
-    <p class="reveal">Oxbrier cultivates demand while retaining the audience. Anchored on a newsletter and distributed across social feeds and podcasts, we offer insider access to unseen worlds. While headlines speculate about a covert op gone pear-shaped, we're publishing ground truth. Our founders have built and scaled editorial operations for two decades;<sup class="fn"><a data-fn="19" href="#fn-19">19</a></sup> by cultivating demand we harvest development insights, wield leverage at every counterparty, and create a route to D2C.<sup class="fn"><a data-fn="20" href="#fn-20">20</a></sup></p>
+    <div class="section-title reveal">Brand Strategy</div>
+    <p class="reveal">Oxbrier has a direct relationship with our audience through editorial content – think "Esquire with an edge". Anchored by newsletter and distributed across social feeds and podcasts, the platform covers tradecraft, hardware, and dispatches from the field – with long-form analysis on the truth behind the headlines. When a classified operation makes the news, we're publishing insider commentary within hours.</p>
 
     <figure class="reveal media">
       <img src="assets/gtsmile.gif" alt="" loading="lazy">
     </figure>
+    <p class="reveal">An owned audience creates negotiating leverage at every counterparty – talent, distributors, and financiers.<sup class="fn"><a data-fn="18" href="#fn-18">18</a></sup> Our founders have built and scaled branded editorial operations for two decades;<sup class="fn"><a data-fn="19" href="#fn-19">19</a></sup> applying that to a genre we already own is the easiest part of this business.</p>
 
-    <p class="reveal">In March 1994, Tyler Brûlé was shot by a sniper in Kabul while covering the Afghan Civil War. He later launched <a href="https://monocle.com/">Monocle</a>, a magazine that created the category it served: global affairs, travel, and design under a single editorial identity. That audience became the distribution for Monocle retail shops, cafes, conferences, a 24-hour radio station, and brand partnerships – direct-to-consumer across every channel. Retail now accounts for a quarter of the company's revenue,<sup class="fn"><a data-fn="21" href="#fn-21">21</a></sup> and its online newsletter has triple the average open-rate.<sup class="fn"><a data-fn="22" href="#fn-22">22</a></sup> Brûlé has said explicitly that Monocle is not a magazine – it's a brand that communicates through publishing.</p>
+    <p class="reveal">Tyler Brûlé covered wars for the Sunday Times Magazine and Vanity Fair before founding Wallpaper* and <a href="https://monocle.com/">Monocle</a>, a magazine that created the category it served: global affairs, travel, and design under a single editorial identity. That audience became the distribution for Monocle retail shops, cafes, conferences, a 24-hour radio station, and brand partnerships – direct-to-consumer across every channel. Retail now accounts for a quarter of the company's revenue,<sup class="fn"><a data-fn="20" href="#fn-20">20</a></sup> and its online newsletter reaches triple the industry average.<sup class="fn"><a data-fn="21" href="#fn-21">21</a></sup> Brûlé has said explicitly that Monocle is not a magazine – it's a brand that communicates through publishing.</p>
+    <p class="reveal">Without a continuous audience relationship, incumbents' brand value resets to zero between releases. Oxbrier's editorial layer retains the audience between releases and generates equity in the process.</p>
 
     <p class="reveal">The pattern repeats across industries: companies that build a direct audience relationship trade at a premium over those that rent one.</p>
 
@@ -684,10 +671,10 @@
       <table class="tbl-editorial">
         <thead><tr><th>Entity</th><th>Audience Owned</th><th>Outcome</th><th>Unlock</th></tr></thead>
         <tbody>
-          <tr><td>A24</td><td>Brand loyalty program; 70% viewer return rate<sup class="fn"><a data-fn="23" href="#fn-23">23</a></sup></td><td>$3.5B valuation<sup class="fn"><a data-fn="2" href="#fn-2">2</a></sup></td><td>Theatrical releases sell on brand alone; no single title required</td></tr>
-          <tr><td>The Free Press</td><td>1.5M subscribers, 170K paid</td><td>Acquired by Paramount Skydance for $150M in five years<sup class="fn"><a data-fn="24" href="#fn-24">24</a></sup></td><td>Studio paid for the audience, not the content</td></tr>
-          <tr><td>Pirate Wires</td><td>100K+ subscribers; funded by Founders Fund as VP Solana's editorial arm<sup class="fn"><a data-fn="25" href="#fn-25">25</a></sup><sup class="fn"><a data-fn="26" href="#fn-26">26</a></sup></td><td>Shapes Silicon Valley narrative; <em>The Atlantic</em> profiled Solana as the most influential voice in tech media (2024)</td><td>VC firm built an editorial operation as a strategic asset, not a cost center</td></tr>
-          <tr><td>NEON</td><td>Curatorial identity across social + festival circuit</td><td><em>Longlegs</em>: $128M on sub-$10M budget, zero TV ads<sup class="fn"><a data-fn="27" href="#fn-27">27</a></sup></td><td>Brand replaced the entire P&amp;A budget</td></tr>
+          <tr><td>A24</td><td>Brand loyalty program; 70% viewer return rate<sup class="fn"><a data-fn="22" href="#fn-22">22</a></sup></td><td>$3.5B valuation<sup class="fn"><a data-fn="6" href="#fn-6">6</a></sup></td><td>Theatrical releases sell on brand alone; no single title required</td></tr>
+          <tr><td>The Free Press</td><td>1.5M subscribers, 170K paid</td><td>Acquired by Paramount Skydance for $150M in five years<sup class="fn"><a data-fn="23" href="#fn-23">23</a></sup></td><td>Studio paid for the audience, not the content</td></tr>
+          <tr><td>Pirate Wires</td><td>100K+ subscribers; funded by Founders Fund as VP Solana's editorial arm<sup class="fn"><a data-fn="24" href="#fn-24">24</a></sup><sup class="fn"><a data-fn="25" href="#fn-25">25</a></sup></td><td>Shapes Silicon Valley narrative; <em>The Atlantic</em> profiled Solana as the most influential voice in tech media (2024)</td><td>VC firm built an editorial operation as a strategic asset, not a cost center</td></tr>
+          <tr><td>NEON</td><td>Curatorial identity across social + festival circuit</td><td><em>Longlegs</em>: $128M on sub-$10M budget, zero TV ads<sup class="fn"><a data-fn="26" href="#fn-26">26</a></sup></td><td>Brand replaced the entire P&amp;A budget</td></tr>
           <tr><td>Daily Wire</td><td>1M+ subscribers via political editorial</td><td>Bypasses theaters and streamers entirely</td><td>Editorial built the audience; audience became the distribution</td></tr>
           <tr><td>Crunchyroll</td><td>15M+ paid subscribers in a single genre (anime)</td><td>Acquired by Sony for $1.175B (2021)</td><td>Subscriber base valued as a distribution asset</td></tr>
           <tr><td>Red Bull Media House</td><td>Brand-owned audience across film, print, digital, events</td><td>Operates as a profit center; 2,000+ employees</td><td>Editorial finances the brand, not the reverse</td></tr>
@@ -713,7 +700,7 @@
           <tr><td>Risk-averse development</td><td>Warfighter-led development</td></tr>
           <tr><td>Loaded production costs</td><td>Genre-focused production</td></tr>
           <tr><td>Rented distribution</td><td>Distribution optionality</td></tr>
-          <tr><td>Opex marketing (CAC &gt; LTV)</td><td>Capex marketing (LTV &gt; CAC)</td></tr>
+          <tr><td>Opex marketing <span style="white-space:nowrap">(CAC&nbsp;&gt;&nbsp;LTV)</span></td><td>Capex marketing <span style="white-space:nowrap">(LTV&nbsp;&gt;&nbsp;CAC)</span></td></tr>
           <tr><td>Debt-funded extraction at distress multiples</td><td>Compounding at platform multiples</td></tr>
         </tbody>
       </table>
@@ -737,71 +724,66 @@
     <div class="section-title reveal">Sources</div>
     <ol>
       <li id="fn-1"><div class="fn-pop__sources">
+        <a class="fn-pop__source" href="https://deadline.com/2025/05/sp-downgrades-warner-bros-dicovery-junk-status-linear-tv-1236406355/" target="_blank" rel="noopener">S&amp;P downgraded WBD to junk status. Deadline, May 2025.</a>
+        <a class="fn-pop__source" href="https://www.stocktitan.net/sec-filings/PSKY/8-k-paramount-skydance-corp-reports-material-event-8c96b378295d.html" target="_blank" rel="noopener">Paramount Skydance $10B credit facility. SEC 8-K filing, 2026.</a>
+        <a class="fn-pop__source" href="https://www.cmcsa.com/static-files/64e663a4-1784-4b7e-94e3-1ec3cae98015" target="_blank" rel="noopener">Comcast Q4 2024 earnings release.</a>
+      </div></li>
+      <li id="fn-2"><span><a href="https://www.cnn.com/2022/02/26/entertainment/mid-budget-movie-decline-cec/index.html" target="_blank" rel="noopener">CNN, February 2022; Stephen Follows, 2017.</a></span></li>
+      <li id="fn-3"><div class="fn-pop__sources">
         <a class="fn-pop__source" href="https://variety.com/2025/film/news/moviegoers-comedies-thrillers-global-cinema-study-1236340585/" target="_blank" rel="noopener">Global Cinema Foundation, 2025: 68,000-respondent study across 15 markets; 46% want more thrillers in theaters.</a>
         <a class="fn-pop__source" href="https://www.thewrap.com/creative-content/movies/goat-original-films-nrg-survey/" target="_blank" rel="noopener">NRG survey, August 2025: audiences prioritize original films.</a>
         <a class="fn-pop__source" href="https://www.thewrap.com/tubi-the-stream-2024-report/" target="_blank" rel="noopener">Tubi / Harris Poll, "The Stream 2024," 2,503 respondents: lack of appealing content is the top barrier.</a>
         <a class="fn-pop__source" href="https://www.motionpictures.org/research/" target="_blank" rel="noopener">MPA / Comscore THEME Report, 2024.</a>
       </div></li>
-      <li id="fn-2"><span><a href="https://variety.com/2024/film/news/a24-funding-josh-kushner-thrive-capital-1236048525/" target="_blank" rel="noopener">Variety, June 2024: A24 reached a $3.5B valuation via Josh Kushner's Thrive Capital-led financing round, up 40% from the prior round.</a></span></li>
-      <li id="fn-3"><div class="fn-pop__sources">
-        <a class="fn-pop__source" href="https://deadline.com/2025/05/sp-downgrades-warner-bros-dicovery-junk-status-linear-tv-1236406355/" target="_blank" rel="noopener">S&amp;P downgraded WBD to junk status. Deadline, May 2025.</a>
-        <a class="fn-pop__source" href="https://www.stocktitan.net/sec-filings/PSKY/8-k-paramount-skydance-corp-reports-material-event-8c96b378295d.html" target="_blank" rel="noopener">Paramount Skydance $10B credit facility. SEC 8-K filing, 2026.</a>
-        <a class="fn-pop__source" href="https://www.cmcsa.com/static-files/64e663a4-1784-4b7e-94e3-1ec3cae98015" target="_blank" rel="noopener">Comcast Q4 2024 earnings release.</a>
+      <li id="fn-4"><div class="fn-pop__sources">
+        <a class="fn-pop__source" href="https://www.amazon.com/Marketing-Moviegoers-Handbook-Strategies-Tactics/dp/0809331969" target="_blank" rel="noopener">Robert Marich, <em>Marketing to Moviegoers</em> (3rd ed., Southern Illinois University Press, 2013): annual single-picture P&amp;L analysis shows Hollywood spends as much marketing a film as making it.</a>
+        <a class="fn-pop__source" href="https://www.hollywoodreporter.com/news/general-news/200-million-rising-hollywood-struggles-721818/" target="_blank" rel="noopener">Pamela McClintock, "$200 Million and Rising: Hollywood Struggles With Soaring Marketing Costs," <em>The Hollywood Reporter</em>.</a>
       </div></li>
-      <li id="fn-4"><span><a href="https://www.cnn.com/2022/02/26/entertainment/mid-budget-movie-decline-cec/index.html" target="_blank" rel="noopener">CNN, February 2022; Stephen Follows, 2017.</a></span></li>
-      <li id="fn-5"><div class="fn-pop__sources">
+      <li id="fn-5"><span>Disney lost over $11B on streaming from Disney+'s 2019 launch through 2024 before posting its first full-year profit of $574M (<a href="https://localbroadcastsales.com/the-real-reason-for-disneys-11-billion-streaming-losses/" target="_blank" rel="noopener">Local Broadcast Sales</a>; <a href="https://fortune.com/2024/11/15/disney-streaming-billion-profit-bob-iger/" target="_blank" rel="noopener">Fortune, November 2024</a>). Peacock lost $2.7B in 2023 and $1.8B in 2024, with cumulative losses estimated at ~$7B (Comcast quarterly earnings filings). Paramount+ lost $1.66B in 2023; Warner Bros. Discovery's DTC division lost $2.1B in 2022 before reaching marginal profitability in 2023 (<a href="https://www.hollywoodreporter.com/business/business-news/streaming-profit-report-netflix-leads-disney-warner-bros-1236184451/" target="_blank" rel="noopener">Hollywood Reporter</a>). Combined studio streaming losses from 2019–2024 exceed $25B.</span></li>
+      <li id="fn-6"><span><a href="https://variety.com/2024/film/news/a24-funding-josh-kushner-thrive-capital-1236048525/" target="_blank" rel="noopener">Variety, June 2024: A24 reached a $3.5B valuation via Josh Kushner's Thrive Capital-led financing round, up 40% from the prior round.</a></span></li>
+      <li id="fn-7"><div class="fn-pop__sources">
         <a class="fn-pop__source" href="https://uk.finance.yahoo.com/news/james-bond-movie-really-made-130000482.html" target="_blank" rel="noopener">Bond franchise: $7.8B over 25 films, drove Amazon's $8.45B MGM acquisition. Yahoo Finance, 2024.</a>
         <a class="fn-pop__source" href="https://variety.com/2022/film/news/amazon-mgm-james-bond-whats-next-1235208070/" target="_blank" rel="noopener">Variety, March 2022: Amazon's $8.45B acquisition of MGM cited Bond as primary driver.</a>
         <a class="fn-pop__source" href="https://www.accio.com/business/how-many-best-selling-books-has-john-grisham-sold" target="_blank" rel="noopener">Grisham: 300M copies sold, 37 consecutive #1 bestsellers. Accio, 2024.</a>
         <a class="fn-pop__source" href="https://www.nbcuniversal.com/article/nbcuniversal-acquires-robert-ludlums-iconic-bourne-and-treadstone-series" target="_blank" rel="noopener">Bourne: $1.64B film franchise; NBCU acquired all rights after seven competitive bids. NBCUniversal, 2025.</a>
         <a class="fn-pop__source" href="https://www.boxofficemojo.com/franchise/fr2571603717/" target="_blank" rel="noopener"><em>Jurassic Park</em>: ~$6B across six films (1993–2022). Box Office Mojo.</a>
       </div></li>
-      <li id="fn-6"><div class="fn-pop__sources">
+      <li id="fn-8"><div class="fn-pop__sources">
         <a class="fn-pop__source" href="https://www.thefiscaltimes.com/Articles/2013/10/03/Tom-Clancy-Bestselling-Author-Numbers" target="_blank" rel="noopener">Books: 100M+ copies in print. The Fiscal Times, October 2013.</a>
         <a class="fn-pop__source" href="https://www.boxofficemojo.com/year/world/" target="_blank" rel="noopener">Film: $788M theatrical box office. Box Office Mojo.</a>
         <a class="fn-pop__source" href="https://gameworldobserver.com/2024/10/31/ubisoft-six-franchises-with-revenue-over-1-billion" target="_blank" rel="noopener">Gaming revenue: Ubisoft's Clancy-branded gaming franchises sold 114M+ units with $7–8B+ estimated lifetime revenue, led by Rainbow Six Siege at $3.5B alone. Game World Observer, October 2024.</a>
         <a class="fn-pop__source" href="https://staticctf.ubisoft.com/8aefmxkxpxwl/75tVaQDaf9A5X8N97roq4K/5fc21239bb19bfc7ee1a8599a216e1fc/Closing_press_release_21.11.25_EN.pdf" target="_blank" rel="noopener">Gaming IP enterprise value: Tencent's November 2025 &euro;1.16B investment in Ubisoft's Vantage Studios — valued the subsidiary at &euro;3.8B pre-money. Ubisoft press release, November 21, 2025.</a>
       </div></li>
-      <li id="fn-7"><span><a href="https://www.usnews.com/news/blogs/washington-whispers/2013/10/02/ronald-reagan-responsible-for-tom-clancys-rise" target="_blank" rel="noopener">Reagan called <em>The Hunt for Red October</em> "the perfect yarn" and Cold War policymakers cited Clancy as predictive of actual operations. U.S. News, October 2013.</a></span></li>
-      <li id="fn-8"><span><a href="https://time.com/archive/6644176/tom-clancy/" target="_blank" rel="noopener">Colin Powell on Tom Clancy. Time, October 2013.</a></span></li>
-      <li id="fn-9"><span><a href="https://en.wikipedia.org/wiki/Heat_(1995_film)" target="_blank" rel="noopener">Wikipedia, <em>Heat (1995 film)</em>: De Niro's character named after the actual thief Neil McCauley.</a></span></li>
-      <li id="fn-10"><span><a href="https://www.yardbarker.com/entertainment/articles/20_facts_you_might_not_know_about_heat/s1__35424164" target="_blank" rel="noopener">Yardbarker: former British SAS trained the <em>Heat</em> cast for three months with live rounds; bank shootout still studied at police academies.</a></span></li>
-      <li id="fn-11"><div class="fn-pop__sources">
+      <li id="fn-9"><span><a href="https://www.usnews.com/news/blogs/washington-whispers/2013/10/02/ronald-reagan-responsible-for-tom-clancys-rise" target="_blank" rel="noopener">Reagan called <em>The Hunt for Red October</em> "the perfect yarn" and Cold War policymakers cited Clancy as predictive of actual operations. U.S. News, October 2013.</a></span></li>
+      <li id="fn-10"><span><a href="https://time.com/archive/6644176/tom-clancy/" target="_blank" rel="noopener">Colin Powell on Tom Clancy. Time, October 2013.</a></span></li>
+      <li id="fn-11"><span><a href="https://en.wikipedia.org/wiki/Heat_(1995_film)" target="_blank" rel="noopener">Wikipedia, <em>Heat (1995 film)</em>: De Niro's character named after the actual thief Neil McCauley.</a></span></li>
+      <li id="fn-12"><span><a href="https://www.yardbarker.com/entertainment/articles/20_facts_you_might_not_know_about_heat/s1__35424164" target="_blank" rel="noopener">Yardbarker: former British SAS trained the <em>Heat</em> cast for three months with live rounds; bank shootout still studied at police academies.</a></span></li>
+      <li id="fn-13"><div class="fn-pop__sources">
         <a class="fn-pop__source" href="https://www.eif.org/InvestEU/news/2025/european-movies-and-tv-programmes-to-get-boost-with-eur25-million-eif-investment-in-finland.htm" target="_blank" rel="noopener">European Investment Fund, February 2025: IPR.VC Fund III anchored by &euro;25M EIF commitment.</a>
         <a class="fn-pop__source" href="https://deadline.com/2020/07/shamrock-capital-400-million-content-investment-fund-entertainment-ip-1202991053/" target="_blank" rel="noopener">Deadline, July 2020: Shamrock Capital $400M content IP fund.</a>
         <a class="fn-pop__source" href="https://www.romanolaw.com/the-financialization-of-film-tv-rights-a-new-frontier-for-investors-and-creators/" target="_blank" rel="noopener">Romano Law, March 2026: Apollo, HarbourView, and Content Partners building institutional film/TV IP positions.</a>
       </div></li>
-      <li id="fn-12"><span><a href="https://www.celebritynetworth.com/richest-celebrities/actors/al-pacino-net-worth/" target="_blank" rel="noopener">Celebrity Net Worth: Pacino's standard quote in 1995 was $10M+; he took $5–8M for <em>Heat</em>.</a></span></li>
-      <li id="fn-13"><span><a href="https://collider.com/margin-call-interview-jeremy-irons-stanley-tucci-kevin-spacey-jc-chandor/" target="_blank" rel="noopener">Slate, "The Making of Margin Call," January 2011; Collider interview with J.C. Chandor, Sundance 2011: entire cast — Spacey, Irons, Tucci, Bettany, Moore, Quinto — agreed to work at SAG minimum for the $3.5M production shot in 17 days.</a></span></li>
-      <li id="fn-14"><div class="fn-pop__sources">
+      <li id="fn-14"><span><a href="https://www.celebritynetworth.com/richest-celebrities/actors/al-pacino-net-worth/" target="_blank" rel="noopener">Celebrity Net Worth: Pacino's standard quote in 1995 was $10M+; he took $5–8M for <em>Heat</em>.</a></span></li>
+      <li id="fn-15"><span><a href="https://collider.com/margin-call-interview-jeremy-irons-stanley-tucci-kevin-spacey-jc-chandor/" target="_blank" rel="noopener">Slate, "The Making of Margin Call," January 2011; Collider interview with J.C. Chandor, Sundance 2011: entire cast — Spacey, Irons, Tucci, Bettany, Moore, Quinto — agreed to work at SAG minimum for the $3.5M production shot in 17 days.</a></span></li>
+      <li id="fn-16"><div class="fn-pop__sources">
         <a class="fn-pop__source" href="https://www.celebritynetworth.com/richest-celebrities/actors/bradley-cooper-net-worth/" target="_blank" rel="noopener">Celebrity Net Worth: Cooper waived his upfront fee entirely and took backend points; earned ~$50M on $547M worldwide gross vs. a standard quote of $15–20M.</a>
         <a class="fn-pop__source" href="https://www.hollywoodreporter.com/movies/movie-news/hangover-3-bradley-cooper-zach-galifianakis-ed-helms-salary-284538/" target="_blank" rel="noopener">Hollywood Reporter on Cooper salary negotiations.</a>
       </div></li>
-      <li id="fn-15"><span><a href="https://screenrant.com/oppenheimer-cast-salary-paid-how-much/" target="_blank" rel="noopener">Variety via ScreenRant: Oppenheimer cast salaries — Murphy $10M; Downey Jr. / Damon / Blunt $4M each vs. standard $10–20M quotes.</a></span></li>
-      <li id="fn-16"><div class="fn-pop__sources">
-        <a class="fn-pop__source" href="https://www.amazon.com/Marketing-Moviegoers-Handbook-Strategies-Tactics/dp/0809331969" target="_blank" rel="noopener">Robert Marich, <em>Marketing to Moviegoers</em> (3rd ed., Southern Illinois University Press, 2013): annual single-picture P&amp;L analysis shows Hollywood spends as much marketing a film as making it.</a>
-        <a class="fn-pop__source" href="https://www.hollywoodreporter.com/news/general-news/200-million-rising-hollywood-struggles-721818/" target="_blank" rel="noopener">Pamela McClintock, "$200 Million and Rising: Hollywood Struggles With Soaring Marketing Costs," <em>The Hollywood Reporter</em>.</a>
-      </div></li>
-      <li id="fn-17"><div class="fn-pop__sources">
-        <a class="fn-pop__source" href="https://stephenfollows.com/p/how-a-cinemas-box-office-income-is-distributed" target="_blank" rel="noopener">Stephen Follows: theatrical revenue operates on a sliding scale that shifts toward exhibitors over time; studios receive 55–65% of opening-weekend gross, declining each subsequent week.</a>
-        <a class="fn-pop__source" href="https://www.rogerebert.com/roger-ebert/how-your-ticket-price-is-divided" target="_blank" rel="noopener">Roger Ebert, "How your ticket price is divided": full-run split averages roughly 50/50 between studio and exhibitor.</a>
-        <a class="fn-pop__source" href="https://investor.amctheatres.com/sec-filings/all-sec-filings/content/0001411579-24-000021/amc-20231231x10k.htm" target="_blank" rel="noopener">AMC 2023 10-K: the three largest US exhibitors (AMC, Regal, Cinemark) collectively capture ~54% of domestic box office.</a>
-      </div></li>
-      <li id="fn-18"><span>Disney lost over $11B on streaming from Disney+'s 2019 launch through 2024 before posting its first full-year profit of $574M (<a href="https://localbroadcastsales.com/the-real-reason-for-disneys-11-billion-streaming-losses/" target="_blank" rel="noopener">Local Broadcast Sales</a>; <a href="https://fortune.com/2024/11/15/disney-streaming-billion-profit-bob-iger/" target="_blank" rel="noopener">Fortune, November 2024</a>). Peacock lost $2.7B in 2023 and $1.8B in 2024, with cumulative losses estimated at ~$7B (Comcast quarterly earnings filings). Paramount+ lost $1.66B in 2023; Warner Bros. Discovery's DTC division lost $2.1B in 2022 before reaching marginal profitability in 2023 (<a href="https://www.hollywoodreporter.com/business/business-news/streaming-profit-report-netflix-leads-disney-warner-bros-1236184451/" target="_blank" rel="noopener">Hollywood Reporter</a>). Combined studio streaming losses from 2019–2024 exceed $25B.</span></li>
+      <li id="fn-17"><span><a href="https://screenrant.com/oppenheimer-cast-salary-paid-how-much/" target="_blank" rel="noopener">Variety via ScreenRant: Oppenheimer cast salaries — Murphy $10M; Downey Jr. / Damon / Blunt $4M each vs. standard $10–20M quotes.</a></span></li>
+      <li id="fn-18"><span><a href="https://www.smartinsights.com/digital-marketing-strategy/customer-acquisition-strategy/new-media-options/" target="_blank" rel="noopener">"Owned distribution" describes channels a brand owns and controls directly — its own websites, newsletters, apps, and social presence — versus paid (advertising) and earned (PR, word of mouth) media. Smart Insights.</a></span></li>
       <li id="fn-19"><div class="fn-pop__sources">
         <a class="fn-pop__source" href="https://monocle.com/contributors/colin-nagy/" target="_blank" rel="noopener">Colin Nagy: Monocle contributor page.</a>
         <a class="fn-pop__source" href="https://muckrack.com/colinnagy/articles" target="_blank" rel="noopener">Colin Nagy: Muck Rack (FT, Skift).</a>
         <a class="fn-pop__source" href="https://whyisthisinteresting.substack.com/about" target="_blank" rel="noopener"><em>Why Is This Interesting?</em> daily newsletter (tens of thousands of subscribers).</a>
         <a class="fn-pop__source" href="https://www.zoominfo.com/p/Colin-Nagy/3054802881" target="_blank" rel="noopener">Instagram/Threads global brand strategy: ZoomInfo.</a>
       </div></li>
-      <li id="fn-20"><span><a href="https://www.smartinsights.com/digital-marketing-strategy/customer-acquisition-strategy/new-media-options/" target="_blank" rel="noopener">"Owned distribution" describes channels a brand owns and controls directly — its own websites, newsletters, apps, and social presence — versus paid (advertising) and earned (PR, word of mouth) media. Smart Insights.</a></span></li>
-      <li id="fn-21"><span><a href="https://www.amediaoperator.com/news/monocle-debt-revenue-profit-swiss-winkontent/" target="_blank" rel="noopener">Retail sales of branded goods account for approximately 25% of revenue for Monocle's UK entity (Winkontent Limited). A Media Operator analysis, 2024.</a></span></li>
-      <li id="fn-22"><span><a href="https://www.amediaoperator.com/news/monocle-debt-revenue-profit-swiss-winkontent/" target="_blank" rel="noopener">Monocle's newsletter reaches 92,000 subscribers at a 47% open rate (Monocle media kit, 2024). Industry average for media/publishing is approximately 15–17% (Mailchimp, 2024). A Media Operator, 2024.</a></span></li>
-      <li id="fn-23"><span><a href="https://variety.com/2026/tv/news/hbo-max-a24-movies-streaming-deal-renewal-marty-supreme-1236631271/" target="_blank" rel="noopener">Variety, January 2026: HBO Max / A24 Pay-1 deal renewal — 70% of viewers who watched one A24 film returned for more, averaging four titles.</a></span></li>
-      <li id="fn-24"><span><a href="https://deadline.com/2025/10/cbs-news-bari-weiss-paramount-free-press-1236570944/" target="_blank" rel="noopener">Deadline, October 2025: Paramount Skydance acquired The Free Press for $150M (1.5M subscribers, 170K paid).</a></span></li>
-      <li id="fn-25"><span><a href="https://www.businessinsider.com/silicon-valley-tech-industry-war-against-media-journalists-podcasts-broletariat-2024-7" target="_blank" rel="noopener">Business Insider, July 2024: Pirate Wires, a Founders Fund-backed media company founded by Mike Solana (VP of Founders Fund); over 100,000 subscribers.</a></span></li>
-      <li id="fn-26"><span><a href="https://www.theatlantic.com/ideas/archive/2024/10/mike-solana-pirate-wires/680355/" target="_blank" rel="noopener">Christopher Beam, "The Most Opinionated Man in America," <em>The Atlantic</em>, October 2024.</a></span></li>
-      <li id="fn-27"><span><a href="https://deadline.com/2024/07/box-office-longlegs-fly-me-to-the-moon-channing-tatum-nicolas-cage-1236008154/" target="_blank" rel="noopener">Deadline, July 2024: NEON's <em>Longlegs</em> $128M worldwide on sub-$10M release budget.</a></span></li>
+      <li id="fn-20"><span><a href="https://www.amediaoperator.com/news/monocle-debt-revenue-profit-swiss-winkontent/" target="_blank" rel="noopener">Retail sales of branded goods account for approximately 25% of revenue for Monocle's UK entity (Winkontent Limited). A Media Operator analysis, 2024.</a></span></li>
+      <li id="fn-21"><span><a href="https://www.amediaoperator.com/news/monocle-debt-revenue-profit-swiss-winkontent/" target="_blank" rel="noopener">Monocle's newsletter reaches 92,000 subscribers at a 47% open rate (Monocle media kit, 2024). Industry average for media/publishing is approximately 15–17% (Mailchimp, 2024). A Media Operator, 2024.</a></span></li>
+      <li id="fn-22"><span><a href="https://variety.com/2026/tv/news/hbo-max-a24-movies-streaming-deal-renewal-marty-supreme-1236631271/" target="_blank" rel="noopener">Variety, January 2026: HBO Max / A24 Pay-1 deal renewal — 70% of viewers who watched one A24 film returned for more, averaging four titles.</a></span></li>
+      <li id="fn-23"><span><a href="https://deadline.com/2025/10/cbs-news-bari-weiss-paramount-free-press-1236570944/" target="_blank" rel="noopener">Deadline, October 2025: Paramount Skydance acquired The Free Press for $150M (1.5M subscribers, 170K paid).</a></span></li>
+      <li id="fn-24"><span><a href="https://www.businessinsider.com/silicon-valley-tech-industry-war-against-media-journalists-podcasts-broletariat-2024-7" target="_blank" rel="noopener">Business Insider, July 2024: Pirate Wires, a Founders Fund-backed media company founded by Mike Solana (VP of Founders Fund); over 100,000 subscribers.</a></span></li>
+      <li id="fn-25"><span><a href="https://www.theatlantic.com/ideas/archive/2024/10/mike-solana-pirate-wires/680355/" target="_blank" rel="noopener">Christopher Beam, "The Most Opinionated Man in America," <em>The Atlantic</em>, October 2024.</a></span></li>
+      <li id="fn-26"><span><a href="https://deadline.com/2024/07/box-office-longlegs-fly-me-to-the-moon-channing-tatum-nicolas-cage-1236008154/" target="_blank" rel="noopener">Deadline, July 2024: NEON's <em>Longlegs</em> $128M worldwide on sub-$10M release budget.</a></span></li>
     </ol>
   </section>
 
@@ -811,6 +793,36 @@
 </div><!-- .main-wrap -->
 
 <script>
+  // Fit cover title to viewport width
+  (function(){
+    var el = document.getElementById('coverTitle');
+    if(!el) return;
+
+    var probe = document.createElement('span');
+    probe.textContent = el.textContent.toUpperCase();
+    probe.style.cssText =
+      'position:absolute;top:-9999px;left:-9999px;visibility:hidden;' +
+      'white-space:nowrap;pointer-events:none;' +
+      'font-family:"Nova Mono",monospace;' +
+      'font-weight:400;font-stretch:100%;letter-spacing:-0.045em;' +
+      'text-transform:uppercase;' +
+      'font-size:200px;';
+    document.body.appendChild(probe);
+
+    function fit(){
+      // 28px pad each side + 2% extra optical margin on right
+      var target = window.innerWidth - 56 - (window.innerWidth * 0.02);
+      var textW = probe.getBoundingClientRect().width;
+      if(textW <= 0 || target <= 0) return;
+      el.style.fontSize = Math.floor(target / textW * 200) + 'px';
+    }
+
+    document.fonts.ready.then(function(){
+      requestAnimationFrame(function(){ requestAnimationFrame(fit); });
+    });
+    window.addEventListener('resize', fit);
+  })();
+
   // Scroll progress dot
   const scrollDot = document.getElementById('scrollDot');
   const sourcesEl = document.getElementById('sources');
@@ -910,33 +922,6 @@
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   // Footnote popover
-  // Slug map (footnote number → kebab-case slug from markdown source)
-  const FN_SLUGS = {
-    1:'audience-demand', 2:'a24-val', 3:'incumbent-debt', 4:'midbudget-collapse',
-    5:'franchise-data', 6:'clancy-total', 7:'reagan-clancy', 8:'powell-clancy',
-    9:'heat-cast', 10:'heat-sas', 11:'ip-asset-class', 12:'pacino-rate',
-    13:'margin-call-scale', 14:'cooper-backend', 15:'opp-cuts',
-    16:'pna-equals-production', 17:'exhibitor-split', 18:'streaming-losses',
-    19:'editorial-credentials', 20:'owned-distribution', 21:'monocle-retail',
-    22:'monocle-newsletter', 23:'a24-hbomax', 24:'free-press', 25:'pirate-wires',
-    26:'atlantic-solana', 27:'longlegs-box'
-  };
-  // Manual overrides for slugs that don't auto-derive cleanly
-  const FN_TITLE_OVERRIDES = {
-    'a24-val':'A24 Valuation',
-    'powell-clancy':'Elite Influence',
-    'clancy-total':'Clancyverse',
-    'opp-cuts':'Prestige Cast',
-    'heat-sas':'SAS Training',
-    'pna-equals-production':'Marketing Math'
-  };
-  function fnTitle(n){
-    const slug = FN_SLUGS[n];
-    if(!slug) return '';
-    if(FN_TITLE_OVERRIDES[slug]) return FN_TITLE_OVERRIDES[slug];
-    return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-  }
-
   const sourceText = {};
   document.querySelectorAll('.sources li').forEach((li,i)=>{
     const stack = li.querySelector('.fn-pop__sources');
@@ -970,10 +955,7 @@
     const raw = sourceText[n] || '';
     pop.innerHTML =
       '<div class="fn-pop__head">' +
-        '<div class="fn-pop__head-left">' +
-          '<span class="fn-pop__num">['+n+']</span>' +
-          '<span class="fn-pop__title">'+fnTitle(n)+'</span>' +
-        '</div>' +
+        '<span class="fn-pop__num">['+n+']</span>' +
         '<div class="fn-pop__head-right">' +
           '<button class="fn-pop__jump" type="button">jump to sources ↓</button>' +
           '<button class="fn-pop__close" type="button" aria-label="Close">close ✕</button>' +
