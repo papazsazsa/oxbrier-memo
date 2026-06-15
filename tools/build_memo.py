@@ -176,6 +176,17 @@ def tighten_key_takeaways(fragment: str) -> str:
     return fragment
 
 
+def classify_section_tables(section_id: str, fragment: str) -> str:
+    table_classes = {
+        "we-own-the-supply": "tbl-films",
+        "we-cultivate-demand": "tbl-editorial",
+    }
+    table_class = table_classes.get(section_id)
+    if table_class is None:
+        return fragment
+    return fragment.replace("<table>", f'<table class="{table_class}">', 1)
+
+
 def clean_sources(source_html: str) -> str:
     source_html = source_html.replace("<p>", "<span>").replace("</p>", "</span>")
     source_html = re.sub(r'<a href="(https?://[^"]+)">https?://[^<]+</a>', r'<a href="\1" target="_blank" rel="noopener">\1</a>', source_html)
@@ -261,6 +272,8 @@ def render_sections(rendered: str) -> str:
         if section_id == "key-takeaways":
             klass += " section-band"
             body = tighten_key_takeaways(body)
+        else:
+            body = classify_section_tables(section_id, body)
         output.append(f'<{tag} class="{klass}" id="{section_id}">\n{heading_html}\n{body}\n</{tag}>')
         first_content_section = False
 

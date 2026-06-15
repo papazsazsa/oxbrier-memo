@@ -349,9 +349,17 @@
     }
   }
   /* First table (films): wide enough that cells wrap to ~2 lines max */
-  .tbl-films{min-width:920px;}
+  .tbl-films{min-width:1080px;}
   /* Second table (editorial): wide enough that cells wrap to ~3 lines max */
-  .tbl-editorial{min-width:1000px;}
+  .tbl-editorial{min-width:1280px;}
+  .tbl-editorial th:nth-child(1),
+  .tbl-editorial td:nth-child(1){min-width:150px;}
+  .tbl-editorial th:nth-child(2),
+  .tbl-editorial td:nth-child(2){min-width:260px;}
+  .tbl-editorial th:nth-child(3),
+  .tbl-editorial td:nth-child(3){min-width:260px;}
+  .tbl-editorial th:nth-child(4),
+  .tbl-editorial td:nth-child(4){min-width:430px;}
   /* Key Takeaways comparison table: 3 columns, modest breakout */
   .tbl-takeaways th,
   .tbl-takeaways td{width:50%;}
@@ -684,7 +692,7 @@ asset.<sup class="fn"><a data-fn="11" href="#fn-11">11</a></sup></p>
 consistently outperform, bring together talented collaborators, and
 enjoy critical acclaim.</p>
 <div class="tbl-wrap tbl-wide reveal">
-<table>
+<table class="tbl-films">
 <thead>
 <tr>
 <th>Film</th>
@@ -825,7 +833,7 @@ that communicates through publishing.</p>
 <p class="reveal">The pattern repeats across industries: companies that build a direct
 audience relationship trade at a premium over those that rent one.</p>
 <div class="tbl-wrap tbl-wide reveal">
-<table>
+<table class="tbl-editorial">
 <thead>
 <tr>
 <th>Entity</th>
