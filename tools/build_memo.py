@@ -16,12 +16,14 @@ import re
 import subprocess
 import sys
 import tempfile
+from urllib.parse import urlparse
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MEMO_MD = ROOT.parent / "01 Opportunity Memo.md"
 INDEX_HTML = ROOT / "index.html"
+ORDERED_NOTES: list[tuple[str, str]] = []
 
 
 def run_pandoc(markdown: str) -> str:
@@ -52,7 +54,54 @@ def run_pandoc(markdown: str) -> str:
 def prepare_markdown(markdown: str) -> str:
     markdown = re.sub(r"%%.*?%%\s*", "", markdown, flags=re.S)
     markdown = markdown.replace("==", "")
+    markdown = normalize_footnotes(markdown)
     return markdown.strip() + "\n"
+
+
+def normalize_footnotes(markdown: str) -> str:
+    global ORDERED_NOTES
+    defs: dict[str, str] = {}
+    body_lines: list[str] = []
+    current_label: str | None = None
+    current_lines: list[str] = []
+
+    def flush_def() -> None:
+        nonlocal current_label, current_lines
+        if current_label is not None:
+            defs[current_label] = "\n".join(current_lines).rstrip()
+        current_label = None
+        current_lines = []
+
+    for line in markdown.splitlines():
+        match = re.match(r"^\[\^([^\]]+)\]:\s*(.*)$", line)
+        if match:
+            flush_def()
+            current_label = match.group(1)
+            current_lines = [match.group(2)]
+            continue
+        if current_label is not None:
+            if line.startswith(" ") or line.startswith("\t") or not line.strip():
+                current_lines.append(line)
+                continue
+            flush_def()
+        body_lines.append(line)
+    flush_def()
+
+    body = "\n".join(body_lines)
+    order: list[str] = []
+
+    def replace_ref(match: re.Match[str]) -> str:
+        label = match.group(1)
+        if label not in defs:
+            return match.group(0)
+        if label not in order:
+            order.append(label)
+        n = order.index(label) + 1
+        return f'<sup class="fn"><a data-fn="{n}" href="#fn-{n}">{n}</a></sup>'
+
+    body = re.sub(r"\[\^([^\]]+)\]", replace_ref, body)
+    ORDERED_NOTES = [(label, defs[label]) for label in order]
+    return body.rstrip() + "\n"
 
 
 def title_case_heading(text: str) -> str:
@@ -111,6 +160,51 @@ def add_reveal_classes(fragment: str, hero: bool = False) -> str:
     return fragment
 
 
+def tighten_key_takeaways(fragment: str) -> str:
+    fragment = fragment.replace('<div class="tbl-wrap tbl-wide reveal">\n<table>', '<div class="tbl-wrap reveal">\n<table class="tbl-takeaways">', 1)
+
+    def repl_li(match: re.Match[str]) -> str:
+        raw = match.group(1).strip()
+        raw = re.sub(r"<strong>(.*?)</strong>\s*[–-]\s*", r'<span class="kt-label">\1.</span> ', raw, count=1)
+        return f'<p class="reveal">{raw}</p>'
+
+    fragment = re.sub(r"<ul>\s*(.*?)\s*</ul>", lambda m: re.sub(r"<li>(.*?)</li>", repl_li, m.group(1), flags=re.S), fragment, count=1, flags=re.S)
+    fragment = fragment.replace(
+        '<p class="reveal">Chris Papasadero <a href="mailto:chris&#64;oxbrier&#46;com">chris&#64;oxbrier&#46;com</a></p>',
+        '<p class="reveal contact-lede">Chris Papasadero<br><a href="mailto:chris&#64;oxbrier&#46;com">chris&#64;oxbrier&#46;com</a></p>',
+    )
+    return fragment
+
+
+def clean_sources(source_html: str) -> str:
+    source_html = source_html.replace("<p>", "<span>").replace("</p>", "</span>")
+    source_html = re.sub(r'<a href="(https?://[^"]+)">https?://[^<]+</a>', r'<a href="\1" target="_blank" rel="noopener">\1</a>', source_html)
+    return source_html
+
+
+def render_note(markdown: str) -> str:
+    html_text = run_pandoc(markdown.strip())
+    html_text = re.sub(r"^\s*<p>|</p>\s*$", "", html_text.strip(), flags=re.S)
+
+    def label_url(match: re.Match[str]) -> str:
+        url = match.group(1)
+        text = re.sub(r"\s+", "", match.group(2))
+        if text != url:
+            return match.group(0)
+        host = urlparse(url).netloc.replace("www.", "")
+        return f'<a href="{html.escape(url)}" target="_blank" rel="noopener">{html.escape(host or "source")}</a>'
+
+    html_text = re.sub(r'<a\s+href="(https?://[^"]+)">\s*(https?://.*?)\s*</a>', label_url, html_text, flags=re.S)
+    return html_text
+
+
+def render_sources() -> str:
+    items = []
+    for i, (_label, note) in enumerate(ORDERED_NOTES, start=1):
+        items.append(f'<li id="fn-{i}"><span>{render_note(note)}</span></li>')
+    return '<section class="block sources" id="sources">\n<div class="section-title reveal">Sources</div>\n<ol>\n' + "\n".join(items) + "\n</ol>\n</section>"
+
+
 def insert_media(section_id: str, fragment: str) -> str:
     if section_id == "we-own-the-supply":
         fragment = re.sub(
@@ -166,18 +260,13 @@ def render_sections(rendered: str) -> str:
         klass = "hero" if first_content_section else "block"
         if section_id == "key-takeaways":
             klass += " section-band"
+            body = tighten_key_takeaways(body)
         output.append(f'<{tag} class="{klass}" id="{section_id}">\n{heading_html}\n{body}\n</{tag}>')
         first_content_section = False
 
     body_html = "\n\n".join(output)
 
-    # Pandoc's footnotes section is already in the rendered body after the last h1 split.
-    footnotes = re.search(r'(<section class="block sources" id="sources">.*?</section>)', rendered, flags=re.S)
-    if footnotes and footnotes.group(1) not in body_html:
-        footnote_html = footnotes.group(1)
-        footnote_html = footnote_html.replace('<p class="reveal">', '<p>')
-        footnote_html = re.sub(r"\s*<hr />\s*", "\n", footnote_html)
-        body_html += "\n\n<hr class=\"sep\">\n\n" + footnote_html
+    body_html += "\n\n<hr class=\"sep\">\n\n" + render_sources()
 
     return body_html
 
